@@ -9,9 +9,5 @@ import { Eleve } from '../../interfaces/eleve';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  utilisateur: Eleve = {
-    id: 0,
-    nom: 'Charrier',
-    prenom: "Axel"
-  }
+  utilisateurs: Eleve[] = [];
 }
