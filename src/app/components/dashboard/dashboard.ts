@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TableModule } from 'primeng/table';
+import { Eleve } from '../../interfaces/eleve';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +9,5 @@ import { TableModule } from 'primeng/table';
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  utilisateur = {
-    "nom": 'Charrier',
-    "prenom": "Axel"
-  }
+  utilisateurs: Eleve[] = [];
 }

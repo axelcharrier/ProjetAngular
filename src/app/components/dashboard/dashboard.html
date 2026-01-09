@@ -1,15 +1,17 @@
-<p-table [tableStyle]="{ 'min-width': '50rem' }">
+<p-table [value]="utilisateurs" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header>
         <tr>
+            <th>Id</th>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Actions</th>
         </tr>
     </ng-template>
-    <ng-template #body>
+    <ng-template #body let-utilisateur>
         <tr>
-            <td></td>
-            <td></td>
+            <td>{{ utilisateur.id }}</td>
+            <td>{{ utilisateur.nom }}</td>
+            <td>{{ utilisateur.prenom }}</td>
             <td></td>
         </tr>
     </ng-template>
