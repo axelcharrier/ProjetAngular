@@ -41,4 +41,12 @@ export class Dashboard {
 
     this.utilisateurs.update((datas) => ([...datas, studentToAdd]));
   }
+
+  removeStudent(id: number){
+    this.ElevesService.removeEleve(
+      id
+    )
+
+    this.utilisateurs.update((datas) => (datas.filter(student => student.id != id)));
+  }
 }

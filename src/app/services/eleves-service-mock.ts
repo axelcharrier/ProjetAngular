@@ -33,6 +33,6 @@ export class ElevesServiceMock {
   }
 
   removeEleve(id: number){
-    return
+    this.students.update((datas) => datas.filter(student => student.id !== id));
   }
 }
