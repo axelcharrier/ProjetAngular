@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Eleve } from '../interfaces/eleve';
 import { of } from 'rxjs';
 
@@ -6,7 +6,7 @@ import { of } from 'rxjs';
   providedIn: 'root',
 })
 export class ElevesServiceMock {
-  data: Eleve[] = [
+  students = signal<Eleve[]>([
     {
       id: 0,
       nom: "Charrier",
@@ -22,9 +22,17 @@ export class ElevesServiceMock {
       nom: "Charrier",
       prenom: "Joy"
     },
-  ]
+  ]);
 
   getAllData() {
-    return of(this.data)
+    return of(this.students())
+  }
+
+  addEleve(student: Eleve) {
+    this.students.update((datas) => ([...datas, student]))
+  }
+
+  removeEleve(id: number){
+    return
   }
 }

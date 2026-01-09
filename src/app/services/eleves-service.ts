@@ -11,4 +11,12 @@ export class ElevesService {
   {
     return []
   }
+
+  addEleve() {
+    return
+  }
+
+  removeEleve(id: number){
+    return
+  }
 }
