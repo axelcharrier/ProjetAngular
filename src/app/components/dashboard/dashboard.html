@@ -1,3 +1,16 @@
+<form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+    <label for="id">id</label>
+    <input id="id" type="number" formControlName="id" />
+
+    <label for="last-name">nom</label>
+    <input id="last-name" type="text" formControlName="nom" />
+
+    <label for="first-name">prénom</label>
+    <input id="first-name" type="text" formControlName="prenom" />
+
+    <button type="submit" class="primary">Apply now</button>
+</form>    
+
 <p-table [value]="utilisateurs()" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header>
         <tr>
@@ -12,7 +25,9 @@
             <td>{{ utilisateur.id }}</td>
             <td>{{ utilisateur.nom }}</td>
             <td>{{ utilisateur.prenom }}</td>
-            <td></td>
+            <td>
+                <p-button label="Supprimer" (click)="removeStudent(utilisateur.id)" />
+            </td>
         </tr>
     </ng-template>
 </p-table>
