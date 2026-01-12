@@ -51,9 +51,8 @@ export class Dashboard {
   }
 
   removeStudent(id: number){
-    this.StudentsService.removeStudent(id)
-
     this.students.update((datas) => (datas.filter(student => student.id != id)));
+    this.StudentsService.removeStudent(id)
   }
 
   testValues: boolean = false;
