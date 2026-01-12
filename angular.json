@@ -9,7 +9,16 @@
     "ProjetAngular": {
       "i18n": {
         "sourceLocale": "en-US",
-        "locales": {"fr-FR" : "src/locale/messages.fr.json"}
+        "locales": {
+          "fr-FR" : {
+            "translation": "src/locale/messages.fr.json",
+            "subPath": "fr"
+          },
+          "es-ES" : {
+            "translation": "src/locale/messages.es.json",
+            "subPath": "es"
+          }
+        }
       },
       "projectType": "application",
       "schematics": {
@@ -24,9 +33,6 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "localize": [
-              "fr-FR"
-            ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -68,6 +74,18 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "development-fr": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "localize" : ["fr-FR"]
+            },
+            "development-es": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "localize" : ["es-ES"]
             }
           },
           "defaultConfiguration": "production"
@@ -80,6 +98,12 @@
             },
             "development": {
               "buildTarget": "ProjetAngular:build:development"
+            },
+            "development-fr": {
+              "buildTarget": "ProjetAngular:build:development-fr"
+            },
+            "development-es": {
+              "buildTarget": "ProjetAngular:build:development-es"
             }
           },
           "defaultConfiguration": "development"
