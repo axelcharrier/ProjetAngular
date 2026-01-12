@@ -1,33 +1,43 @@
-<form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
-    <label for="id">id</label>
-    <input id="id" type="number" formControlName="id" />
+<div>
+    <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+        <div class="flex flex-wrap items-end gap-4 m-5">
+            <p-floatlabel>
+                <p-inputnumber id="id" formControlName="id" required />
+                <label for="number" aria-label="Id">Id</label>
+            </p-floatlabel>
 
-    <label for="last-name">nom</label>
-    <input id="last-name" type="text" formControlName="nom" />
+            <p-floatlabel>
+                <input pInputText id="last-name" formControlName="lastName" required />
+                <label p-floatlabel for="last-name" aria-label="last-name">Nom</label>
+            </p-floatlabel>
+                
+            <p-floatlabel>
+                <input pInputText id="first-name" formControlName="firstName" required />
+                <label for="first-name" aria-label="first-name">Prénom</label>
+            </p-floatlabel>
 
-    <label for="first-name">prénom</label>
-    <input id="first-name" type="text" formControlName="prenom" />
+            <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" >Créer</button>
+        </div>
+    </form>
 
-    <button type="submit" class="primary">Apply now</button>
-</form>    
-
-<p-table [value]="utilisateurs()" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template #header>
-        <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Actions</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-utilisateur>
-        <tr>
-            <td>{{ utilisateur.id }}</td>
-            <td>{{ utilisateur.nom }}</td>
-            <td>{{ utilisateur.prenom }}</td>
-            <td>
-                <p-button label="Supprimer" (click)="removeStudent(utilisateur.id)" />
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+    <p-table [value]="students()" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-utilisateur>
+            <tr>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.lastName }}</td>
+                <td>{{ utilisateur.firstName }}</td>
+                <td>
+                    <p-button label="Supprimer" (onClick)="removeStudent(utilisateur.id)" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

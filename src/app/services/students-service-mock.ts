@@ -1,26 +1,26 @@
 import { Injectable, signal } from '@angular/core';
-import { Eleve } from '../interfaces/eleve';
+import { Student } from '../interfaces/student';
 import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ElevesServiceMock {
-  students = signal<Eleve[]>([
+export class StudentsServiceMock {
+  students = signal<Student[]>([
     {
       id: 0,
-      nom: "Charrier",
-      prenom: "Axel"
+      lastName: "Charrier",
+      firstName: "Axel"
     },
     {
       id: 1,
-      nom: "Charrier",
-      prenom: "Timéo"
+      lastName: "Charrier",
+      firstName: "Timéo"
     },
     {
       id: 2,
-      nom: "Charrier",
-      prenom: "Joy"
+      lastName: "Charrier",
+      firstName: "Joy"
     },
   ]);
 
@@ -28,11 +28,11 @@ export class ElevesServiceMock {
     return of(this.students())
   }
 
-  addEleve(student: Eleve) {
+  addStudent(student: Student) {
     this.students.update((datas) => ([...datas, student]))
   }
 
-  removeEleve(id: number){
+  removeStudent(id: number){
     this.students.update((datas) => datas.filter(student => student.id !== id));
   }
 }
