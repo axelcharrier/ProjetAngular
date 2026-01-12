@@ -3,39 +3,39 @@
         <div class="flex flex-wrap items-end gap-4 m-5">
             <p-floatlabel>
                 <p-inputnumber id="id" formControlName="id" required />
-                <label for="number" aria-label="Id">Id</label>
+                <label for="number" aria-label="Id" i18n >Id</label>
             </p-floatlabel>
 
             <p-floatlabel>
                 <input pInputText id="last-name" formControlName="lastName" required />
-                <label p-floatlabel for="last-name" aria-label="last-name">Nom</label>
+                <label p-floatlabel for="last-name" aria-label="last-name" i18n>Last name</label>
             </p-floatlabel>
                 
             <p-floatlabel>
                 <input pInputText id="first-name" formControlName="firstName" required />
-                <label for="first-name" aria-label="first-name">Prénom</label>
+                <label for="first-name" aria-label="first-name" i18n>First name</label>
             </p-floatlabel>
 
-            <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" >Créer</button>
+            <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" i18n >Create</button>
         </div>
     </form>
 
     <p-table [value]="students()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Actions</th>
+                <th i18n >Id</th>
+                <th i18n >Last name</th>
+                <th i18n >First name</th>
+                <th i18n >Actions</th>
             </tr>
         </ng-template>
-        <ng-template #body let-utilisateur>
+        <ng-template #body let-user>
             <tr>
-                <td>{{ utilisateur.id }}</td>
-                <td>{{ utilisateur.lastName }}</td>
-                <td>{{ utilisateur.firstName }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.firstName }}</td>
                 <td>
-                    <p-button label="Supprimer" (onClick)="removeStudent(utilisateur.id)" />
+                    <p-button i18n-label label="Delete" (onClick)="removeStudent(user.id)" />
                 </td>
             </tr>
         </ng-template>
