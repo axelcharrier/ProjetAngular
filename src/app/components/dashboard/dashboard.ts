@@ -1,7 +1,7 @@
 import { Component, computed, inject, Signal, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { Eleve } from '../../interfaces/eleve';
-import { ElevesServiceMock } from '../../services/eleves-service-mock';
+import { Student } from '../../interfaces/student';
+import { StudentsServiceMock } from '../../services/students-service-mock';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -15,52 +15,52 @@ import { InputNumber } from "primeng/inputnumber";
 })
 
 export class Dashboard {
-  utilisateurs = signal<Eleve[]>([]);
-  ElevesService: ElevesServiceMock = inject(ElevesServiceMock);
+  students = signal<Student[]>([]);
+  StudentsService: StudentsServiceMock = inject(StudentsServiceMock);
 
   studentForm = new FormGroup({
     id: new FormControl(),
-    nom: new FormControl(''),
-    prenom: new FormControl(''),
+    lastName: new FormControl(''),
+    firstName: new FormControl(''),
   })
 
   
   constructor() {
-    this.ElevesService.getAllData().subscribe((x) => this.utilisateurs.set(x));
+    this.StudentsService.getAllData().subscribe((x) => this.students.set(x));
   }
 
   submitStudent() {
     if(!this.studentForm.value.id || 
-      !this.studentForm.value.nom || this.studentForm.value.nom.trim() === '' ||
-      !this.studentForm.value.prenom || this.studentForm.value.prenom.trim() === '')
+      !this.studentForm.value.lastName || this.studentForm.value.lastName.trim() === '' ||
+      !this.studentForm.value.firstName || this.studentForm.value.firstName.trim() === '')
       return;
 
-    const studentToAdd: Eleve = {
+    const studentToAdd: Student = {
       id: this.studentForm.value.id,
-      nom: this.studentForm.value.nom,
-      prenom: this.studentForm.value.prenom
+      lastName: this.studentForm.value.lastName,
+      firstName: this.studentForm.value.firstName
     };
 
-    this.ElevesService.addEleve(
+    this.StudentsService.addStudent(
       studentToAdd
     );
 
-    this.utilisateurs.update((datas) => ([...datas, studentToAdd]));
+    this.students.update((datas) => ([...datas, studentToAdd]));
 
     this.studentForm.reset();
   }
 
   removeStudent(id: number){
-    this.ElevesService.removeEleve(id)
+    this.StudentsService.removeStudent(id)
 
-    this.utilisateurs.update((datas) => (datas.filter(student => student.id != id)));
+    this.students.update((datas) => (datas.filter(student => student.id != id)));
   }
 
   testValues: boolean = false;
 
   buttonIsDisabled(): boolean{
     this.studentForm.valueChanges.subscribe(test => {
-      this.testValues = (test.nom?.trim() !== '' && test.prenom?.trim() !== '' && test.id)
+      this.testValues = (test.lastName?.trim() !== '' && test.firstName?.trim() !== '' && test.id)
     })
     return !this.testValues
   }

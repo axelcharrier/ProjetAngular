@@ -7,12 +7,12 @@
             </p-floatlabel>
 
             <p-floatlabel>
-                <input pInputText id="last-name" formControlName="nom" required />
+                <input pInputText id="last-name" formControlName="lastName" required />
                 <label p-floatlabel for="last-name" aria-label="last-name">Nom</label>
             </p-floatlabel>
                 
             <p-floatlabel>
-                <input pInputText id="first-name" formControlName="prenom" required />
+                <input pInputText id="first-name" formControlName="firstName" required />
                 <label for="first-name" aria-label="first-name">Prénom</label>
             </p-floatlabel>
 
@@ -20,7 +20,7 @@
         </div>
     </form>
 
-    <p-table [value]="utilisateurs()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="students()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
                 <th>Id</th>
@@ -32,8 +32,8 @@
         <ng-template #body let-utilisateur>
             <tr>
                 <td>{{ utilisateur.id }}</td>
-                <td>{{ utilisateur.nom }}</td>
-                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.lastName }}</td>
+                <td>{{ utilisateur.firstName }}</td>
                 <td>
                     <p-button label="Supprimer" (onClick)="removeStudent(utilisateur.id)" />
                 </td>
