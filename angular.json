@@ -7,6 +7,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "ProjetAngular": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {"fr-FR" : "src/locale/messages.fr.json"}
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,6 +24,9 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "localize": [
+              "fr-FR"
+            ],
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -36,7 +43,10 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            }
+            },
+            "polyfills": [
+              "@angular/localize/init"
+            ]
           },
           "configurations": {
             "production": {
