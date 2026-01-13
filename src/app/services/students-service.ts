@@ -12,6 +12,11 @@ export class StudentsService {
     return []
   }
 
+  getById(id: number)
+  {
+    return
+  }
+
   addStudent() {
     return
   }

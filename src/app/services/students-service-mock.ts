@@ -28,8 +28,23 @@ export class StudentsServiceMock {
     return of(this.students())
   }
 
+  getById(id: number) {
+    return of(this.students().filter(x => x.id === id))
+  }
+
   addStudent(student: Student) {
     this.students.update((datas) => ([...datas, student]))
+  }
+
+  updateStudent(student: Student){
+    const studentToUpdate = this.students().find((stu)=>stu.id === student.id);
+
+    if (!studentToUpdate)
+      return
+
+    studentToUpdate.lastName = student.lastName;
+    studentToUpdate.firstName = student.firstName;
+
   }
 
   removeStudent(id: number){
