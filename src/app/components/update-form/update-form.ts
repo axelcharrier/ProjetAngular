@@ -12,8 +12,7 @@ import { Router } from '@angular/router'
 @Component({
   selector: 'app-update-form',
   imports: [FloatLabel, InputText, InputNumber, ReactiveFormsModule, ButtonModule],
-  templateUrl: './update-form.html',
-  styleUrl: './update-form.scss',
+  templateUrl: './update-form.html'
 })
 
 export class UpdateForm {

@@ -4,8 +4,7 @@ import { Dashboard } from "../dashboard/dashboard";
 @Component({
   selector: 'app-home',
   imports: [Dashboard],
-  templateUrl: './home.html',
-  styleUrl: './home.scss',
+  templateUrl: './home.html'
 })
 export class Home {
 
