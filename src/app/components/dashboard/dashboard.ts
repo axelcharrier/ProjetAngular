@@ -7,10 +7,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumber } from "primeng/inputnumber";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [TableModule, ButtonModule, InputTextModule, ReactiveFormsModule, FloatLabelModule, InputNumber],
+  imports: [TableModule, ButtonModule, InputTextModule, ReactiveFormsModule, FloatLabelModule, InputNumber, RouterLink],
   templateUrl: './dashboard.html',
 })
 

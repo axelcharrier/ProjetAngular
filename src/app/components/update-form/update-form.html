@@ -1,0 +1,25 @@
+<div>
+    <h2 class="m-2" i18n >Edit student</h2>
+    <div class="flex row justify-center">
+        <form [formGroup]="studentForm" (ngSubmit)="submitForm()">
+            <div class="flex flex-wrap items-end gap-5 m-5">
+                <p-floatlabel>
+                    <p-inputnumber id="id" formControlName="id" [disabled]="true" />
+                    <label for="number" aria-label="Id" i18n >Id</label>
+                </p-floatlabel>
+
+                <p-floatlabel>
+                    <input pInputText id="last-name" formControlName="lastName" required />
+                    <label p-floatlabel for="last-name" aria-label="last-name" i18n>Last name</label>
+                </p-floatlabel>
+                                    
+                <p-floatlabel>
+                    <input pInputText id="first-name" formControlName="firstName" required />
+                    <label for="first-name" aria-label="first-name" i18n>First name</label>
+                </p-floatlabel>
+
+                <button pButton type="submit" class="primary" i18n >Update</button>
+            </div>
+        </form>
+    </div>
+</div>
