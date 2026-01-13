@@ -17,6 +17,7 @@ import { InputNumber } from "primeng/inputnumber";
 export class Dashboard {
   students = signal<Student[]>([]);
   StudentsService: StudentsServiceMock = inject(StudentsServiceMock);
+  filteredStudents = signal<Student[]>([]);
 
   studentForm = new FormGroup({
     id: new FormControl(),
@@ -27,6 +28,21 @@ export class Dashboard {
   
   constructor() {
     this.StudentsService.getAllData().subscribe((x) => this.students.set(x));
+    this.filteredStudents.set([...this.students()]);
+  }
+
+  testButton(){
+    console.log("button clicked");
+  }
+
+  filterResults(text: string) {
+    if (!text)
+    {
+      this.filteredStudents.set([...this.students()]);
+      return
+    }
+
+    this.filteredStudents.set([...this.filteredStudents().filter(x => x.firstName.toLowerCase().includes(text.toLowerCase()))])
   }
 
   submitStudent() {
@@ -46,12 +62,15 @@ export class Dashboard {
     );
 
     this.students.update((datas) => ([...datas, studentToAdd]));
+    this.filteredStudents.update((datas) => ([...datas, studentToAdd]))
+    this.filterResults('');
 
     this.studentForm.reset();
   }
 
   removeStudent(id: number){
     this.students.update((datas) => (datas.filter(student => student.id != id)));
+    this.filteredStudents.update((datas) => (datas.filter(student => student.id != id)))
     this.StudentsService.removeStudent(id)
   }
 

@@ -1,26 +1,38 @@
 <div>
-    <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+    <div class="m-2 flex justify-between">
+        <div>
+        <h2 i18n >Add a student</h2>
+            <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+                <div class="flex flex-wrap items-end gap-4 m-5">
+                    <p-floatlabel>
+                        <p-inputnumber id="id" formControlName="id" required />
+                        <label for="number" aria-label="Id" i18n >Id</label>
+                    </p-floatlabel>
+
+                    <p-floatlabel>
+                        <input pInputText id="last-name" formControlName="lastName" required />
+                        <label p-floatlabel for="last-name" aria-label="last-name" i18n>Last name</label>
+                    </p-floatlabel>
+                        
+                    <p-floatlabel>
+                        <input pInputText id="first-name" formControlName="firstName" required />
+                        <label for="first-name" aria-label="first-name" i18n>First name</label>
+                    </p-floatlabel>
+
+                    <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" i18n >Create</button>
+                </div>
+        </form>
+        </div>
         <div class="flex flex-wrap items-end gap-4 m-5">
             <p-floatlabel>
-                <p-inputnumber id="id" formControlName="id" required />
-                <label for="number" aria-label="Id" i18n >Id</label>
+                <input pInputText name="filter" #filter>
+                <label for="filter" i18n >Search by first name</label>
             </p-floatlabel>
-
-            <p-floatlabel>
-                <input pInputText id="last-name" formControlName="lastName" required />
-                <label p-floatlabel for="last-name" aria-label="last-name" i18n>Last name</label>
-            </p-floatlabel>
-                
-            <p-floatlabel>
-                <input pInputText id="first-name" formControlName="firstName" required />
-                <label for="first-name" aria-label="first-name" i18n>First name</label>
-            </p-floatlabel>
-
-            <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" i18n >Create</button>
+            <button pButton type="button" class="primary" (click)="filterResults(filter.value)" i18n>Search</button>
         </div>
-    </form>
+    </div>
 
-    <p-table [value]="students()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="filteredStudents()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
                 <th i18n >Id</th>
@@ -35,7 +47,7 @@
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.firstName }}</td>
                 <td>
-                    <p-button i18n-label label="Delete" (onClick)="removeStudent(user.id)" />
+                    <p-button i18n-label label="Delete" (click)="removeStudent(user.id)" />
                 </td>
             </tr>
         </ng-template>
