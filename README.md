@@ -10,6 +10,16 @@ To start a local development server, run:
 ng serve
 ```
 
+To start a local development server with a specific language (french, spanish or english(default)), run:
+
+```bash
+#Spanish
+ng serve --configuration "development-es" 
+
+#French
+ng serve --configuration "development-fr"
+```
+
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
