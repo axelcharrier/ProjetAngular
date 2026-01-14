@@ -48,7 +48,7 @@
                 <td>{{ user.firstName }}</td>
                 <td class="flex flex-wrap items-end gap-4">
                     <p-button i18n-label severity="danger" label="Delete" (click)="removeStudent(user.id)" />
-                    <a pButton i18n severity="info" [routerLink]="['/update', user.id]" >Update</a>
+                    <p-button i18n-label label="Update" severity="info" (click)="toUpdatePage(user.id)" />
                 </td>
             </tr>
         </ng-template>

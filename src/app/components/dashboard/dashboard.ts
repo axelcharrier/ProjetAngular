@@ -1,4 +1,4 @@
-import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../interfaces/student';
 import { StudentsServiceMock } from '../../services/students-service-mock';
@@ -7,18 +7,21 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumber } from "primeng/inputnumber";
-import { RouterLink } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [TableModule, ButtonModule, InputTextModule, ReactiveFormsModule, FloatLabelModule, InputNumber, RouterLink],
+  imports: [TableModule, ButtonModule, InputTextModule, ReactiveFormsModule, FloatLabelModule, InputNumber],
   templateUrl: './dashboard.html',
 })
+
+
 
 export class Dashboard {
   students = signal<Student[]>([]);
   StudentsService: StudentsServiceMock = inject(StudentsServiceMock);
   filteredStudents = signal<Student[]>([]);
+  router = inject(Router)
 
   studentForm = new FormGroup({
     id: new FormControl(),
@@ -82,5 +85,9 @@ export class Dashboard {
       this.testValues = (test.lastName?.trim() !== '' && test.firstName?.trim() !== '' && test.id)
     })
     return !this.testValues
+  }
+
+  toUpdatePage(id: number){
+    this.router.navigate(['/update', id])
   }
 }

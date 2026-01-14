@@ -1,7 +1,7 @@
 import { Component, inject, signal} from '@angular/core';
 import { Student } from '../../interfaces/student';
 import { StudentsServiceMock } from '../../services/students-service-mock';
-import { ActivatedRoute, RedirectCommand, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FloatLabel } from "primeng/floatlabel";
 import { InputText } from "primeng/inputtext";
 import { InputNumber } from "primeng/inputnumber";
@@ -23,8 +23,8 @@ export class UpdateForm {
 
   studentForm = new FormGroup({
     id: new FormControl(),
-    lastName: new FormControl("Test"),
-    firstName: new FormControl("Test")
+    lastName: new FormControl(""),
+    firstName: new FormControl("")
   })
   
 
@@ -34,7 +34,7 @@ export class UpdateForm {
     this.studentService.getById(studentId).subscribe((x) => this.student.set(x))
 
     this.studentForm.setValue({
-      id: this.student()[0].id, 
+      id: this.student()[0].id,
       lastName: this.student()[0].lastName, 
       firstName: this.student()[0].firstName});
   }
