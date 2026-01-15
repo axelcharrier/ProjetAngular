@@ -33,7 +33,6 @@ export class UpdateForm {
 
   }
 
-  createFrom(){}
   form = injectForm({
     defaultValues: {
       id: this.student()[0]?.id,
@@ -41,9 +40,6 @@ export class UpdateForm {
       lastName: '',
     },
     onSubmit: async ({ value }) => {
-      console.log("student :", this.student()[0])
-
-      console.log("values :", value)
       if(value.id === null && value.id === undefined ||
       !value.lastName || value.lastName.trim() === '' ||
       !value.firstName || value.firstName.trim() === '')
