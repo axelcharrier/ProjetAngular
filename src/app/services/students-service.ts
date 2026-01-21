@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Student } from '../interfaces/student';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentsService {
-  data: Student[] = []
+  data: Student[] = [];
+  http: HttpClient = inject(HttpClient);
 
   getAllData(): Student[]
   {
