@@ -2,25 +2,58 @@
     <div class="m-2 flex justify-between">
         <div>
         <h2 i18n >Add a student</h2>
-            <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
-                <div class="flex flex-wrap items-end gap-4 m-5">
+        <form (submit)="handleSubmit($event)">
+            <div class="flex flex-wrap items-end gap-5 m-5">
+                <ng-container
+                [tanstackField]="form"
+                name="id"
+                #id="field"
+                >
                     <p-floatlabel>
-                        <p-inputnumber id="id" formControlName="id" required />
-                        <label for="number" aria-label="Id" i18n >Id</label>
+                        <p-inputnumber
+                                [name]="id.api.name"
+                                [(ngModel)]="id.api.state.value"
+                                (blur)="id.api.handleBlur()"
+                                (input)="id.api.handleChange($any($event).target.value)"
+                                disabled="True"
+                            />
+                        <label [for]="id.api.name" i18n>Id</label>
                     </p-floatlabel>
+                </ng-container>
 
-                    <p-floatlabel>
-                        <input pInputText id="last-name" formControlName="lastName" required />
-                        <label p-floatlabel for="last-name" aria-label="last-name" i18n>Last name</label>
-                    </p-floatlabel>
-                        
-                    <p-floatlabel>
-                        <input pInputText id="first-name" formControlName="firstName" required />
-                        <label for="first-name" aria-label="first-name" i18n>First name</label>
-                    </p-floatlabel>
+                <ng-container
+                [tanstackField]="form"
+                name="firstName"
+                #firstName="field"
+                >
+                    <p-floatLabel>
+                        <input pInputText
+                            [name]="firstName.api.name"
+                            [value]="firstName.api.state.value"
+                            (blur)="firstName.api.handleBlur()"
+                            (input)="firstName.api.handleChange($any($event).target.value)"
+                        />
+                        <label [for]="firstName.api.name" i18n>First name</label>
+                    </p-floatLabel>
+                </ng-container>
 
-                    <button pButton type="submit" class="primary" [disabled]="buttonIsDisabled()" i18n >Create</button>
-                </div>
+                <ng-container
+                [tanstackField]="form"
+                name="lastName"
+                #lastName="field"
+                >
+                    <p-floatLabel>
+                        <label [for]="lastName.api.name" i18n>Last name</label>
+                        <input pInputText
+                            [name]="lastName.api.name"
+                            [value]="lastName.api.state.value"
+                            (blur)="lastName.api.handleBlur()"
+                            (input)="lastName.api.handleChange($any($event).target.value)"
+                        />
+                    </p-floatLabel>
+                </ng-container>
+                <button pButton type="submit" class="primary" i18n >Create</button>
+            </div>
         </form>
         </div>
         <div class="flex flex-wrap items-end gap-4 m-5">

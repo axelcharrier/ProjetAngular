@@ -6,13 +6,15 @@ import { FloatLabel } from "primeng/floatlabel";
 import { InputText } from "primeng/inputtext";
 import { InputNumber } from "primeng/inputnumber";
 import { ButtonModule } from 'primeng/button';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router'
+import { TanStackField, injectForm } from '@tanstack/angular-form'
+
 
 @Component({
   selector: 'app-update-form',
-  imports: [FloatLabel, InputText, InputNumber, ReactiveFormsModule, ButtonModule],
-  templateUrl: './update-form.html'
+  imports: [FloatLabel, InputText, InputNumber, ReactiveFormsModule, ButtonModule, TanStackField, FormsModule],
+  templateUrl: './update-form.html',
 })
 
 export class UpdateForm {
@@ -21,41 +23,45 @@ export class UpdateForm {
   studentService = inject(StudentsServiceMock);
   router = inject(Router)
 
-  studentForm = new FormGroup({
-    id: new FormControl(),
-    lastName: new FormControl(""),
-    firstName: new FormControl("")
-  })
-  
-
   constructor()
   {
     const studentId = Number(this.route.snapshot.params['id']);
     this.studentService.getById(studentId).subscribe((x) => this.student.set(x))
+    this.form.setFieldValue("id", this.student()[0].id)
+    this.form.setFieldValue("lastName", this.student()[0].lastName)
+    this.form.setFieldValue("firstName", this.student()[0].firstName)
 
-    this.studentForm.setValue({
-      id: this.student()[0].id,
-      lastName: this.student()[0].lastName, 
-      firstName: this.student()[0].firstName});
   }
 
-  submitForm(){
-    if(this.studentForm.value.id === null && this.studentForm.value.id === undefined ||
-      !this.studentForm.value.lastName || this.studentForm.value.lastName.trim() === '' ||
-      !this.studentForm.value.firstName || this.studentForm.value.firstName.trim() === '')
-      return;
+  form = injectForm({
+    defaultValues: {
+      id: this.student()[0]?.id,
+      firstName: this.student()[0]?.firstName,
+      lastName: '',
+    },
+    onSubmit: async ({ value }) => {
+      if(value.id === null && value.id === undefined ||
+      !value.lastName || value.lastName.trim() === '' ||
+      !value.firstName || value.firstName.trim() === '')
+        return;
 
-    const studentToAdd: Student = {
-      id: this.studentForm.value.id,
-      lastName: this.studentForm.value.lastName,
-      firstName: this.studentForm.value.firstName,
-    }
+      const studentToAdd: Student = {
+        id: value.id,
+        lastName: value.lastName,
+        firstName: value.firstName,
+      }
 
-    this.studentService.updateStudent(studentToAdd)
-    
-    this.router.navigate([''])
+      this.studentService.updateStudent(studentToAdd)
+      this.router.navigate([''])
 
-    return
+    },
+  })
+
+
+  handleSubmit(event: SubmitEvent) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.form.handleSubmit()
   }
   
 }

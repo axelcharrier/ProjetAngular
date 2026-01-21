@@ -38,6 +38,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.1.18
         version: 4.1.18
+      '@tanstack/angular-form':
+        specifier: ^1.27.7
+        version: 1.27.7(@angular/common@21.0.7(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))
       express:
         specifier: ^5.1.0
         version: 5.2.1
@@ -1800,6 +1803,31 @@ packages:
 
   '@tailwindcss/postcss@4.1.18':
     resolution: {integrity: sha512-Ce0GFnzAOuPyfV5SxjXGn0CubwGcuDB0zcdaPuCSzAa/2vII24JTkH+I6jcbXLb1ctjZMZZI6OjDaLPJQL1S0g==}
+
+  '@tanstack/angular-form@1.27.7':
+    resolution: {integrity: sha512-9//9S/RwgmnDnzJR9xqkCll8fiCTurYiJ1dTutf4c3fonzYoOoaaXAQCRM1sWvvFD+5AwQz44xgtEYaHejHwPA==}
+    peerDependencies:
+      '@angular/core': '>=19.0.0'
+
+  '@tanstack/angular-store@0.7.7':
+    resolution: {integrity: sha512-Lhtn4wY+U9r7f8FjD+lgwH2RIIssmoM0D8CcEcVMd5LGBG0EbzxatsWYMbg5Ezd1JqWCXktbevjF30tF4ndDPw==}
+    peerDependencies:
+      '@angular/common': '>=19.0.0'
+      '@angular/core': '>=19.0.0'
+
+  '@tanstack/devtools-event-client@0.4.0':
+    resolution: {integrity: sha512-RPfGuk2bDZgcu9bAJodvO2lnZeHuz4/71HjZ0bGb/SPg8+lyTA+RLSKQvo7fSmPSi8/vcH3aKQ8EM9ywf1olaw==}
+    engines: {node: '>=18'}
+
+  '@tanstack/form-core@1.27.7':
+    resolution: {integrity: sha512-nvogpyE98fhb0NDw1Bf2YaCH+L7ZIUgEpqO9TkHucDn6zg3ni521boUpv0i8HKIrmmFwDYjWZoCnrgY4HYWTkw==}
+
+  '@tanstack/pacer-lite@0.1.1':
+    resolution: {integrity: sha512-y/xtNPNt/YeyoVxE/JCx+T7yjEzpezmbb+toK8DDD1P4m7Kzs5YR956+7OKexG3f8aXgC3rLZl7b1V+yNUSy5w==}
+    engines: {node: '>=18'}
+
+  '@tanstack/store@0.7.7':
+    resolution: {integrity: sha512-xa6pTan1bcaqYDS9BDpSiS63qa6EoDkPN9RsRaxHuDdVDNntzq3xNwR5YKTU/V3SkSyC9T4YVOPh2zRQN0nhIQ==}
 
   '@tufjs/canonical-json@2.0.0':
     resolution: {integrity: sha512-yVtV8zsdo8qFHe+/3kw81dSLyF7D576A5cCFCi4X7B39tWT7SekaEFUnvnWJHz+9qO7qJTah1JbrDjWKqFtdWA==}
@@ -5205,6 +5233,34 @@ snapshots:
       '@tailwindcss/oxide': 4.1.18
       postcss: 8.5.6
       tailwindcss: 4.1.18
+
+  '@tanstack/angular-form@1.27.7(@angular/common@21.0.7(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))':
+    dependencies:
+      '@angular/core': 21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2)
+      '@tanstack/angular-store': 0.7.7(@angular/common@21.0.7(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))
+      '@tanstack/form-core': 1.27.7
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - '@angular/common'
+
+  '@tanstack/angular-store@0.7.7(@angular/common@21.0.7(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))':
+    dependencies:
+      '@angular/common': 21.0.7(@angular/core@21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 21.0.7(@angular/compiler@21.0.7)(rxjs@7.8.2)
+      '@tanstack/store': 0.7.7
+      tslib: 2.8.1
+
+  '@tanstack/devtools-event-client@0.4.0': {}
+
+  '@tanstack/form-core@1.27.7':
+    dependencies:
+      '@tanstack/devtools-event-client': 0.4.0
+      '@tanstack/pacer-lite': 0.1.1
+      '@tanstack/store': 0.7.7
+
+  '@tanstack/pacer-lite@0.1.1': {}
+
+  '@tanstack/store@0.7.7': {}
 
   '@tufjs/canonical-json@2.0.0': {}
 
