@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Student } from '../interfaces/student';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class StudentsService {
   data: Student[] = [];
   http: HttpClient = inject(HttpClient);
+  apiURL = environment.ApiURL;
 
   getAllData(): Student[]
   {
