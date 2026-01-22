@@ -29,7 +29,13 @@
               />
             </p-floatLabel>
           </ng-container>
-          <button pButton type="submit" class="primary" [disabled]="disableButton()">Create</button>
+          <button pButton type="submit" class="primary" [disabled]="disableButton()">
+            @if (loaderNewStudent()) {
+              <p-progress-spinner ariaLabel="loading" [style]="{ width: '25px', height: '25px' }" />
+            } @else {
+              Create
+            }
+          </button>
         </div>
       </form>
     </div>
@@ -44,7 +50,7 @@
     </div>
   </div>
 
-  @if (loaderStudents) {
+  @if (loaderStudents()) {
     <div class="text-center">
       <p-progress-spinner ariaLabel="loading" />
     </div>

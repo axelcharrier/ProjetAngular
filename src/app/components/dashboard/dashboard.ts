@@ -1,9 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../interfaces/student';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router } from '@angular/router';
 import { injectForm } from '@tanstack/angular-form';
@@ -31,14 +31,14 @@ export class Dashboard {
   filteredStudents = signal<Student[]>([]);
   router = inject(Router);
   testValues: boolean = false;
-  loaderStudents: boolean = true;
-  loaderNewStudents: boolean = true;
+  loaderStudents = signal(true);
+  loaderNewStudent = signal(false);
 
   constructor() {
     this.StudentsService.getAllData().subscribe((x) => {
       this.students.set(x);
       this.filteredStudents.set([...this.students()]);
-      this.loaderStudents = false;
+      this.loaderStudents.set(false);
     });
   }
 
@@ -66,7 +66,7 @@ export class Dashboard {
       )
         return;
 
-      this.loaderNewStudents = true;
+      this.loaderNewStudent.set(true);
       const studentToAdd = signal<Student>({
         id: undefined,
         lastName: value.lastName,
@@ -82,7 +82,7 @@ export class Dashboard {
 
         this.form.reset();
 
-        this.loaderNewStudents = false;
+        this.loaderNewStudent.set(false);
       });
     },
   });
