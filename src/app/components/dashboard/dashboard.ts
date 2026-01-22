@@ -10,6 +10,8 @@ import { injectForm } from '@tanstack/angular-form';
 import { TanStackField } from '@tanstack/angular-form';
 import { StudentsService } from '../../services/students-service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,14 +24,17 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TanStackField,
     FormsModule,
     ProgressSpinnerModule,
+    ToastModule,
   ],
   templateUrl: './dashboard.html',
+  providers: [MessageService],
 })
 export class Dashboard {
   students = signal<Student[]>([]);
   StudentsService: StudentsService = inject(StudentsService);
   filteredStudents = signal<Student[]>([]);
   router = inject(Router);
+  private messageService = inject(MessageService);
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
