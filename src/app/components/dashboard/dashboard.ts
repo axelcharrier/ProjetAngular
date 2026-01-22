@@ -27,14 +27,13 @@ import { MessageService } from 'primeng/api';
     ToastModule,
   ],
   templateUrl: './dashboard.html',
-  providers: [MessageService],
 })
 export class Dashboard {
   students = signal<Student[]>([]);
   StudentsService: StudentsService = inject(StudentsService);
   filteredStudents = signal<Student[]>([]);
   router = inject(Router);
-  private messageService = inject(MessageService);
+  messageService = inject(MessageService);
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
@@ -87,6 +86,12 @@ export class Dashboard {
 
         this.form.reset();
 
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Student Created',
+        });
+
         this.loaderNewStudent.set(false);
       });
     },
@@ -113,6 +118,11 @@ export class Dashboard {
     this.StudentsService.removeStudent(id).subscribe((bool) => {
       this.students.update((datas) => datas.filter((student) => student.id != id));
       this.filteredStudents.update((datas) => datas.filter((student) => student.id != id));
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: 'Student deleted',
+      });
     });
   }
 
