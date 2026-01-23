@@ -12,31 +12,27 @@ export class StudentsService {
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
 
-  getAllData(): Observable<Student[]>
-  {
-    return this.http.get<Student[]>(this.apiURL + "/Student");
+  getAllData(): Observable<Student[]> {
+    return this.http.get<Student[]>(this.apiURL + '/Student');
   }
 
-  getById(id: number): Observable<Student>
-  {
-    return this.http.get<Student>(this.apiURL + "/Student/" + id);
+  getById(id: number): Observable<Student> {
+    return this.http.get<Student>(this.apiURL + '/Student/' + id);
   }
 
   addStudent(studentToAdd: Student): Observable<number> {
-    return this.http.post<number>(this.apiURL + "/Student", 
-      ({
-        lastName: studentToAdd.lastName,
-        firstName: studentToAdd.firstName
-      })
-    )
+    return this.http.post<number>(this.apiURL + '/Student', {
+      lastName: studentToAdd.lastName,
+      firstName: studentToAdd.firstName,
+    });
   }
 
   updateStudent(studentToUpdate: Student): Observable<Student> {
-    return this.http.put<Student>(this.apiURL + "/Student", studentToUpdate)
+    return this.http.put<Student>(this.apiURL + '/Student', studentToUpdate);
   }
 
-  removeStudent(id: number){
-    console.log(this.apiURL +"/Student/" + id);
-    return this.http.delete(this.apiURL +"/Student/" + id);
+  removeStudent(id: number) {
+    console.log(this.apiURL + '/Student/' + id);
+    return this.http.delete(this.apiURL + '/Student/' + id);
   }
 }

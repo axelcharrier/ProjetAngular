@@ -5,9 +5,9 @@ import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const router = inject(Router);
   const messageService = inject(MessageService);
   let detailMessage = '';
+  const router = inject(Router);
   return next(req).pipe(
     catchError((errorResponse: HttpErrorResponse) => {
       // Error message details
@@ -32,8 +32,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
       }
 
-      messageService.add({ severity: 'error', summary: 'Error', detail: detailMessage });
-
+      messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: detailMessage,
+      });
       return throwError(() => errorResponse);
     }),
   );

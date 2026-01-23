@@ -33,21 +33,27 @@ export class UpdateForm {
 
   constructor() {
     const studentId = Number(this.route.snapshot.params['id']);
-    this.studentService.getById(studentId).subscribe((x) => {
-      this.student.set(x);
-      const currentStudent = this.student();
-      if (currentStudent) {
-        this.form.setFieldValue('id', currentStudent.id);
-        this.form.setFieldValue('lastName', currentStudent.lastName);
-        this.form.setFieldValue('firstName', currentStudent.firstName);
-      }
+
+    this.studentService.getById(studentId).subscribe({
+      next: (x) => {
+        this.student.set(x);
+        const currentStudent = this.student();
+        if (currentStudent) {
+          this.form.setFieldValue('id', currentStudent.id);
+          this.form.setFieldValue('lastName', currentStudent.lastName);
+          this.form.setFieldValue('firstName', currentStudent.firstName);
+        }
+      },
+      error: () => {
+        setTimeout(() => this.router.navigate(['']), 100);
+      },
     });
   }
 
   form = injectForm({
     defaultValues: {
       id: this.student()?.id,
-      firstName: this.student()?.firstName,
+      firstName: '',
       lastName: '',
     },
     onSubmit: async ({ value }) => {
