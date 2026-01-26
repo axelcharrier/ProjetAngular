@@ -18,7 +18,7 @@ jobs:
         run: wget -qO- https://get.pnpm.io/install.sh | sh -
 
       - name: Installation Node.js
-        run: pnpm env:
+        run: pnpm env
           
       - name: Installation des dépendances
         run: pnpm install
