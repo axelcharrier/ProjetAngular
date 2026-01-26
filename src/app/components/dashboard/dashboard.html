@@ -6,23 +6,6 @@
             <div class="flex flex-wrap items-end gap-5 m-5">
                 <ng-container
                 [tanstackField]="form"
-                name="id"
-                #id="field"
-                >
-                    <p-floatlabel>
-                        <p-inputnumber
-                                [name]="id.api.name"
-                                [(ngModel)]="id.api.state.value"
-                                (blur)="id.api.handleBlur()"
-                                (input)="id.api.handleChange($any($event).target.value)"
-                                disabled="True"
-                            />
-                        <label [for]="id.api.name" i18n>Id</label>
-                    </p-floatlabel>
-                </ng-container>
-
-                <ng-container
-                [tanstackField]="form"
                 name="firstName"
                 #firstName="field"
                 >
@@ -68,7 +51,6 @@
     <p-table [value]="filteredStudents()" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #header>
             <tr>
-                <th i18n >Id</th>
                 <th i18n >Last name</th>
                 <th i18n >First name</th>
                 <th i18n >Actions</th>
@@ -76,7 +58,6 @@
         </ng-template>
         <ng-template #body let-user>
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.lastName }}</td>
                 <td>{{ user.firstName }}</td>
                 <td class="flex flex-wrap items-end gap-4">

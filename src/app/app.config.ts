@@ -7,6 +7,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { providePrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/themes';
 import Aura from '@primeuix/themes/aura';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 const Noir = definePreset(Aura, {
     semantic: {
@@ -64,7 +65,8 @@ export const appConfig: ApplicationConfig = {
             theme: {
                 preset: Noir
             }
-        })
+        }),
+    provideHttpClient(withFetch())
   ]
 };
 
