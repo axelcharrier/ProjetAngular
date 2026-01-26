@@ -27,8 +27,8 @@ export class StudentsService {
     });
   }
 
-  updateStudent(studentToUpdate: Student): Observable<Student> {
-    return this.http.put<Student>(this.apiURL + '/students/', studentToUpdate);
+  updateStudent(id: number, studentToUpdate: Student): Observable<Student> {
+    return this.http.put<Student>(this.apiURL + '/students/' + id, studentToUpdate);
   }
 
   removeStudent(id: number) {
