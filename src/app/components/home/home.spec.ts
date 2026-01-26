@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Home } from './home';
 import { MessageService } from 'primeng/api';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { StudentsServiceMock } from '../../services/students-service-mock';
+import { StudentsService } from '../../services/students-service';
+
 
 describe('Home', () => {
   let component: Home;
@@ -10,7 +14,11 @@ describe('Home', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Home],
-      providers: [MessageService],
+      providers: [
+        { provide: StudentsService, useClass: StudentsServiceMock },
+        MessageService,
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Home);
