@@ -72,7 +72,7 @@ export class UpdateForm {
         firstName: value.firstName,
       };
 
-      this.studentService.updateStudent(studentToAdd).subscribe(() => {
+      this.studentService.updateStudent(this.route.snapshot.params['id'], studentToAdd).subscribe(() => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
