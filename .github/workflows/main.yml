@@ -1,0 +1,27 @@
+name: Develop Pipeline
+
+#Permission minimale
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installation de pnpm
+        run: wget -qO- https://get.pnpm.io/install.sh | sh -
+
+      - name: Installation Node.js
+        run: pnpm env:
+          
+      - name: Installation des dépendances
+        run: pnpm install
+
+      - name: lancement des tests
+        run: ng test
