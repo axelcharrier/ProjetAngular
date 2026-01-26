@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Home } from './home';
-import { StudentsService } from '../../services/students-service';
+import { MessageService } from 'primeng/api';
 
 describe('Home', () => {
   let component: Home;
@@ -9,10 +9,10 @@ describe('Home', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Home]
-    })
-    .compileComponents();
-    
+      imports: [Home],
+      providers: [MessageService],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(Home);
     component = fixture.componentInstance;
 

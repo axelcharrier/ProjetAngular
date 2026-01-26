@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -61,6 +61,7 @@ const Noir = definePreset(Aura, {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
@@ -70,6 +71,5 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideHttpClient(withFetch(), withInterceptors([errorInterceptor])),
-    MessageService,
   ],
 };
