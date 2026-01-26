@@ -1,8 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Dashboard } from './dashboard';
-import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { StudentsService } from '../../services/students-service';
+import { StudentsServiceMock } from '../../services/students-service-mock';
+
+
 
 describe('Dashboard', () => {
   let component: Dashboard;
@@ -13,9 +17,8 @@ describe('Dashboard', () => {
       imports: [Dashboard],
       providers: [
         MessageService,
-        {
-          provide: Router,
-        },
+        provideHttpClientTesting(),
+        { provide: StudentsService, useClass: StudentsServiceMock },
       ],
     }).compileComponents();
 
