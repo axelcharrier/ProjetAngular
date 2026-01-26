@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../interfaces/student';
 import { ButtonModule } from 'primeng/button';
