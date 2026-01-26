@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Installation de pnpm
         run: wget -qO- https://get.pnpm.io/install.sh | sh -
+             source /home/runner/.bashrc
 
       - name: Installation Node.js
         run: pnpm env
