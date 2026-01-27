@@ -31,14 +31,12 @@ jobs:
       - name: Installation des dépendances
         run: pnpm install
 
-      - name: pnpm setup
-        run: pnpm setup
-
-      - name: sourcing pnpm
-        run: source /home/runner/.bashrc
-
-      - name: Installation de Angular/CLI
-        run: pnpm install -g @angular/cli
+      - name: Setup pnpm et Angular CLI
+        run: |
+          pnpm setup
+          export PNPM_HOME="$HOME/.pnpm"
+          export PATH="$PNPM_HOME:$PATH"
+          pnpm install -g @angular/cli
 
       - name: lancement des tests
         run: ng test
