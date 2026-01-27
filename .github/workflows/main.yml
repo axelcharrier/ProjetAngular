@@ -23,6 +23,7 @@ jobs:
 
       - name: Install pnpm
         run: sudo npm install -g pnpm
+             ls
 
       - name: Installing package
         run: pnpm i
