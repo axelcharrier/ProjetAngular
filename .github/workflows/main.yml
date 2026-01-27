@@ -34,8 +34,11 @@ jobs:
       - name: pnpm setup
         run: pnpm setup
 
+      - name: sourcing pnpm
+        run: source /home/runner/.bashrc
+
       - name: Installation de Angular/CLI
-        run: source /home/runner/.bashrc & pnpm install -g @angular/cli
+        run: pnpm install -g @angular/cli
 
       - name: lancement des tests
         run: ng test
