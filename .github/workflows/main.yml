@@ -34,5 +34,8 @@ jobs:
       - name: Installation de Angular/CLI
         run: pnpm install -g @angular/cli
 
+      - name: pnpm setup
+        run: pnpm setup
+
       - name: lancement des tests
         run: ng test
