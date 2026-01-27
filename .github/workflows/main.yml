@@ -36,6 +36,7 @@ jobs:
           pnpm setup
           export PNPM_HOME="$HOME/.pnpm"
           export PATH="$PNPM_HOME:$PATH"
+          echo "$HOME/.pnpm" >> $GITHUB_PATH
           pnpm install -g @angular/cli
 
       - name: lancement des tests
