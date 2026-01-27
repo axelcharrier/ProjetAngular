@@ -9,20 +9,24 @@ on:
     branches: [develop]
   pull_request:
     branches: [develop]
-  workflow_dispatch:
-  
+
+env:
+  NODE_VERSION: '20' 
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Apt Update
-        run: sudo apt-get update
-
-      - name: Apt install
-        run: sudo apt-get install nodejs npm
-
-      - name: Install pnpm
-        run: sudo npm install -g pnpm
-
-      - name: Installing package
+      - uses: actions/checkout@6
+      - uses: actions/setup-node@6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Installation de pnpm
+        run: wget -qO- https://get.pnpm.io/install.sh | sh -
+          
+      - name: Installation des dépendances
         run: pnpm install
+
+      - name: lancement des tests
+        run: ng test
