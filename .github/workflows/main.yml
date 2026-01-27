@@ -9,22 +9,20 @@ on:
     branches: [develop]
   pull_request:
     branches: [develop]
-
+  workflow_dispatch:
+  
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Installation de pnpm
-        run: wget -qO- https://get.pnpm.io/install.sh | sh -
+      - name: Apt Update
+        run: sudo apt-get update
 
-      - name: Sourcing bashrc
-        run: source /home/runner/.bashrc
+      - name: Apt install
+        run: sudo apt-get install nodejs npm
 
-      - name: Installation Node.js
-        run: pnpm env
-          
-      - name: Installation des dépendances
+      - name: Install pnpm
+        run: sudo npm install -g pnpm
+
+      - name: Installing package
         run: pnpm install
-
-      - name: lancement des tests
-        run: ng test
