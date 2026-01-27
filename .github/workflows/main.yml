@@ -25,4 +25,4 @@ jobs:
         run: sudo npm install -g pnpm
 
       - name: Installing package
-        run: pnpm -v
+        run: pnpm install
