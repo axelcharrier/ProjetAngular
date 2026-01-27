@@ -16,13 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apt Update
-        run: sudo apt-get update
+        run: apt-get update
 
       - name: Apt install
-        run: sudo apt-get install nodejs npm
+        run: apt-get install nodejs npm
 
       - name: Install pnpm
-        run: sudo npm install -g pnpm
+        run: npm install -g pnpm
 
       - name: Installing package
         run: pnpm i
