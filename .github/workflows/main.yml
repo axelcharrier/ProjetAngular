@@ -6,22 +6,38 @@ permissions:
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, master]
   pull_request:
-    branches: [develop]
+    branches: [develop, master]
+
+env:
+  NODE_VERSION: '20' 
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Installation de pnpm
-        run: wget -qO- https://get.pnpm.io/install.sh | sh -
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Installation de npm
+        run: sudo apt-get install npm
 
-      - name: Installation Node.js
-        run: pnpm env
+      - name: Installation de pnpm
+        run: sudo npm install -g pnpm
           
       - name: Installation des dépendances
         run: pnpm install
+
+      - name: Setup pnpm et Angular CLI
+        run: |
+          pnpm setup
+          export PNPM_HOME="$HOME/.pnpm"
+          export PATH="$PNPM_HOME:$PATH"
+          echo "$HOME/.pnpm" >> $GITHUB_PATH
+          pnpm install -g @angular/cli
 
       - name: lancement des tests
         run: ng test
