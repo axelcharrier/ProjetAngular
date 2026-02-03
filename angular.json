@@ -113,6 +113,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options":{
+            "ssl": true,
+            "sslCert": "./localhost.crt",
+            "sslKey": "./localhost.key"
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
