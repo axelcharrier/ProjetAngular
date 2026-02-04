@@ -91,7 +91,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development-fr.ts"
+                  "with": "src/environments/environment_pipeline.ts"
                 }
               ]
             },
@@ -105,7 +105,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development-es.ts"
+                  "with": "src/environments/environment_pipeline.ts"
                 }
               ]
             }
@@ -140,6 +140,11 @@
           "options": {
             "runner": "karma",
             "runnerConfig": true
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "ProjetAngular:build:development"
+            }
           }
         }
       }

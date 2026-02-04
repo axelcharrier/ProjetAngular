@@ -7,10 +7,10 @@ describe('ElevesService', () => {
   let service: StudentsService;
 
   beforeEach(() => {
-    service = TestBed.inject(StudentsService);
     TestBed.configureTestingModule({
       providers: [{ provide: StudentsService, useClass: StudentsServiceMock },],
     });
+    service = TestBed.inject(StudentsService);
   });
 
   it('should be created', () => {
