@@ -154,7 +154,7 @@
           },
           "configurations": {
             "development": {
-              "buildTarget": "ProjetAngular:build:development"
+              "buildTarget": "ProjetAngular:build:development-pipeline"
             }
           }
         }
