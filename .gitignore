@@ -45,3 +45,6 @@ Thumbs.db
 # Https
 *.crt
 *.key
+
+# Environment files
+src/environments/environment*.ts
