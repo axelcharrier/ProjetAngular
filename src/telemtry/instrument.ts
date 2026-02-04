@@ -8,20 +8,23 @@ import { resourceFromAttributes } from '@opentelemetry/resources';
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto';
 import { FetchInstrumentation } from '@opentelemetry/instrumentation-fetch';
 import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request';
-import { environment } from './environments/environment.development';
+import { environment } from '../environments/environment.development';
 import { propagation } from "@opentelemetry/api";
 import { W3CTraceContextPropagator } from "@opentelemetry/core";
 import { v4 as uuidv4 } from 'uuid';
-import { DocumentLoadInstrumentation } from '@opentelemetry/instrumentation-document-load';
 import { UserInteractionInstrumentation } from '@opentelemetry/instrumentation-user-interaction';
 propagation.setGlobalPropagator(new W3CTraceContextPropagator());
 
+// For more informations about telemetry configuration, see the README file
+
+// Default configuration - can be extended to accept dynamic values
 const defaultConfig = {
   serviceName: 'angular-app',
-  collectorUrl: 'https://localhost:21060/v1/traces',
+  collectorUrl: environment.OTLPEndpoint,
   corsUrls: [new RegExp("h.*")],
 };
 
+// Initializing the OpenTelemetry Web Tracer Provider
 const provider = new WebTracerProvider({
   resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: defaultConfig.serviceName,
@@ -30,7 +33,6 @@ const provider = new WebTracerProvider({
   spanProcessors: [new SimpleSpanProcessor(new OTLPTraceExporter({
     url: defaultConfig.collectorUrl, // OTLP endpoint
     headers: {
-      // mettre dans les envs
       'x-otlp-api-key': environment.TraceApiKey,
     },
   }
@@ -44,18 +46,17 @@ provider.register({
 
 // Registering instrumentations
 registerInstrumentations({
-    instrumentations: [
-    new UserInteractionInstrumentation(
-      {
-        eventNames: ['click', 'dblclick', 'mousedown', 'mouseup', 'keydown', 'keyup', 'touchstart', 'touchend'],
-      }
-      ),
-      new XMLHttpRequestInstrumentation(),
-      new FetchInstrumentation({
-        propagateTraceHeaderCorsUrls: defaultConfig.corsUrls || [new RegExp("h.*")],
-        clearTimingResources: false,
-        ignoreUrls: ['https://localhost:21060/v1/traces'],
-      }),
-    ],
-  });
-
+  instrumentations: [
+  new UserInteractionInstrumentation(
+    {
+      eventNames: ['click', 'dblclick', 'mousedown', 'mouseup', 'keydown', 'keyup', 'touchstart', 'touchend'],
+    }
+    ),
+    new XMLHttpRequestInstrumentation(),
+    new FetchInstrumentation({
+      propagateTraceHeaderCorsUrls: defaultConfig.corsUrls || [new RegExp("h.*")],
+      clearTimingResources: false,
+      ignoreUrls: [environment.OTLPEndpoint],
+    }),
+  ],
+});
