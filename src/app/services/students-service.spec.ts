@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StudentsService } from './students-service';
+import { StudentsServiceMock } from './students-service-mock';
 
 describe('ElevesService', () => {
   let service: StudentsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: StudentsService, useClass: StudentsServiceMock },],
+    });
     service = TestBed.inject(StudentsService);
   });
 
