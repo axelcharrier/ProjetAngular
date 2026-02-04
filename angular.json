@@ -81,6 +81,17 @@
                 }
               ]
             },
+            "development-pipeline": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment_pipeline.ts"
+                }
+              ]
+            },
             "development-fr": {
               "optimization": false,
               "extractLicenses": false,
@@ -91,7 +102,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development-fr.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             },
@@ -105,7 +116,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development-es.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }
@@ -113,6 +124,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options":{
+            "ssl": true,
+            "sslCert": "./localhost.crt",
+            "sslKey": "./localhost.key"
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
@@ -135,6 +151,11 @@
           "options": {
             "runner": "karma",
             "runnerConfig": true
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "ProjetAngular:build:development-pipeline"
+            }
           }
         }
       }
