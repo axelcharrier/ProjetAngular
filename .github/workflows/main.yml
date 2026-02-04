@@ -40,4 +40,4 @@ jobs:
           pnpm install -g @angular/cli
 
       - name: lancement des tests
-        run: ng test -c development
+        run: ng test -c development --watch=false --browsers=ChromeHeadless

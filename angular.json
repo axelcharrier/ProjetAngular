@@ -77,6 +77,17 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
+            },
+            "development-pipeline": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment_pipeline.ts"
                 }
               ]
@@ -91,7 +102,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment_pipeline.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             },
@@ -105,7 +116,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment_pipeline.ts"
+                  "with": "src/environments/environment.development.ts"
                 }
               ]
             }

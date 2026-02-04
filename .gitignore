@@ -47,7 +47,4 @@ Thumbs.db
 *.key
 
 # Environment files
-src/app/environments/environment.development.ts
-src/app/environments/environment.ts
 src/environments/environment.development.ts
-src/environments/environment.ts
