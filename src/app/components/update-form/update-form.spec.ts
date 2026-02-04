@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateForm } from './update-form';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs/internal/observable/of';
 import { MessageService } from 'primeng/api';
+import { StudentsService } from '../../services/students-service';
+import { StudentsServiceMock } from '../../services/students-service-mock';
 
 describe('UpdateForm', () => {
   let component: UpdateForm;
@@ -23,6 +25,7 @@ describe('UpdateForm', () => {
             paramMap: of({ get: (key: string) => (key === 'id' ? '0' : null) }),
           },
         },
+        { provide: StudentsService, useClass: StudentsServiceMock },
       ],
     }).compileComponents();
 
