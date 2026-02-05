@@ -8,7 +8,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router } from '@angular/router';
 import { injectForm } from '@tanstack/angular-form';
 import { TanStackField } from '@tanstack/angular-form';
-import { StudentsService } from '../../services/students-service';
+import { StudentsService } from '../../services/students/students-service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
@@ -39,7 +39,7 @@ export class Dashboard {
   loaderNewStudent = signal(false);
 
   constructor() {
-    this.StudentsService.getAllData().subscribe((x) => {
+    this.StudentsService.getAllData()?.subscribe((x) => {
       this.students.set(x);
       this.filteredStudents.set([...this.students()]);
       this.loaderStudents.set(false);

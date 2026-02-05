@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Dashboard } from './dashboard';
 import { MessageService } from 'primeng/api';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
-import { StudentsService } from '../../services/students-service';
-import { StudentsServiceMock } from '../../services/students-service-mock';
+import { StudentsService } from '../../services/students/students-service';
+import { StudentsServiceMock } from '../../services/students/students-service-mock';
 
 
 
