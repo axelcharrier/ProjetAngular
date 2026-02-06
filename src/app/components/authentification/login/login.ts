@@ -8,7 +8,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
-import { Authentification } from '../../../services/authentification/authentification';
+import { Authentification } from '../../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
 
 @Component({

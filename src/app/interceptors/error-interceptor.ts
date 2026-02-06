@@ -20,6 +20,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
         case 401:
           detailMessage = errorResponse.status + ' : Unauthorized';
+          router.navigate(['/login']);
           break;
         case 402:
           detailMessage = errorResponse.status + ' : Access denied';

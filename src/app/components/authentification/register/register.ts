@@ -6,7 +6,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { Authentification } from '../../../services/authentification/authentification';
+import { Authentification } from '../../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
