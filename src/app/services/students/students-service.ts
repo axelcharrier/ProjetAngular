@@ -13,26 +13,31 @@ export class StudentsService {
   apiURL = environment.ApiURL;
 
   getAllData(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.apiURL + '/students');
+    return this.http.get<Student[]>(this.apiURL + '/students', { withCredentials: true });
   }
 
   getById(id: number): Observable<Student> {
-    return this.http.get<Student>(this.apiURL + '/students/' + id);
+    return this.http.get<Student>(this.apiURL + '/students/' + id, { withCredentials: true });
   }
 
   addStudent(studentToAdd: Student): Observable<number> {
-    return this.http.post<number>(this.apiURL + '/students', {
-      lastName: studentToAdd.lastName,
-      firstName: studentToAdd.firstName,
-    });
+    return this.http.post<number>(
+      this.apiURL + '/students',
+      {
+        lastName: studentToAdd.lastName,
+        firstName: studentToAdd.firstName,
+      },
+      { withCredentials: true },
+    );
   }
 
   updateStudent(id: number, studentToUpdate: Student): Observable<Student> {
-    return this.http.put<Student>(this.apiURL + '/students/' + id, studentToUpdate);
+    return this.http.put<Student>(this.apiURL + '/students/' + id, studentToUpdate, {
+      withCredentials: true,
+    });
   }
 
   removeStudent(id: number) {
-    console.log(this.apiURL + '/students/' + id);
-    return this.http.delete(this.apiURL + '/students/' + id);
+    return this.http.delete(this.apiURL + '/students/' + id, { withCredentials: true });
   }
 }
