@@ -13,7 +13,6 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
-import { UpdateForm } from '../update-form/update-form';
 import { UpdatePage } from '../../helpers/pages-helper';
 
 @Component({

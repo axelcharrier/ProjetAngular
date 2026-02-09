@@ -1,4 +1,3 @@
-import path from 'path';
 import { Home } from '../components/home/home';
 import { UpdateForm } from '../components/update-form/update-form';
 import { Register } from '../components/authentification/register/register';
