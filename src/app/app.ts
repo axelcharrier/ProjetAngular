@@ -18,7 +18,7 @@ export class App {
   router = inject(Router);
 
   logout() {
-    this.userServices.user.set('');
+    this.userServices.user?.set('');
     this.authentificationService.logout().subscribe({
       next: () => {
         this.router.navigate(['/login']);
