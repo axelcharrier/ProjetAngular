@@ -11,8 +11,9 @@ export const HomePage = {
 };
 
 export const UpdatePage = {
-  path: (id: number) => `update/${id}`,
+  path: 'update/:id',
   component: UpdateForm,
+  buildPath: (id: number) => `update/${id}`,
   title: 'Update Student',
 };
 
