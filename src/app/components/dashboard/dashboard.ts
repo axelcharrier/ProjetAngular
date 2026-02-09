@@ -38,11 +38,11 @@ export class Dashboard {
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
-  userServices = inject(UserServices);
+  private readonly userServices = inject(UserServices);
 
   constructor() {
-    this.StudentsService.getAllData()?.subscribe((x) => {
-      this.students.set(x);
+    this.StudentsService.getAllData()?.subscribe((response) => {
+      this.students.set(response);
       this.filteredStudents.set([...this.students()]);
       this.loaderStudents.set(false);
       this.userServices.updateUser();
