@@ -45,7 +45,9 @@
                 Sign up
               }
             </button>
-            <p class="text-xs">You already have an account ? <a href="/login">login</a></p>
+            <p class="text-xs">
+              You already have an account ? <a (click)="router.navigate([LoginPage.path])">login</a>
+            </p>
           </div>
         </div>
       </form>

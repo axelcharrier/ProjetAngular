@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { TanStackField, injectForm } from '@tanstack/angular-form';
 import { StudentsService } from '../../services/students/students-service';
 import { MessageService } from 'primeng/api';
+import { HomePage } from '../../helpers/pages-helper';
 
 @Component({
   selector: 'app-update-form',
@@ -45,7 +46,7 @@ export class UpdateForm {
         }
       },
       error: () => {
-        setTimeout(() => this.router.navigate(['']), 100);
+        setTimeout(() => this.router.navigate([HomePage.path]), 100);
       },
     });
   }
@@ -72,14 +73,16 @@ export class UpdateForm {
         firstName: value.firstName,
       };
 
-      this.studentService.updateStudent(this.route.snapshot.params['id'], studentToAdd).subscribe(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Student Updated',
+      this.studentService
+        .updateStudent(this.route.snapshot.params['id'], studentToAdd)
+        .subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Student Updated',
+          });
+          this.router.navigate([HomePage.path]);
         });
-        this.router.navigate(['']);
-      });
     },
   });
 
