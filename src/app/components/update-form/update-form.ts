@@ -8,7 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TanStackField, injectForm } from '@tanstack/angular-form';
-import { StudentsService } from '../../services/students-service';
+import { StudentsService } from '../../services/students/students-service';
 import { MessageService } from 'primeng/api';
 
 @Component({
