@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 
-// Authentification service that handles users
+// This service is used to manage the authentification of the user, it will be used to login, register, logout and get the user info
 export class Authentification {
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
