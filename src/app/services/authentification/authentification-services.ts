@@ -12,7 +12,7 @@ export class Authentification {
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<Object> {
     return this.http.post(
       this.apiURL + '/Authentification/login',
       { email: username, password: password },
@@ -20,14 +20,14 @@ export class Authentification {
     );
   }
 
-  register(username: string, password: string): Observable<any> {
+  register(username: string, password: string): Observable<Object> {
     return this.http.post(this.apiURL + '/Authentification/register', {
       email: username,
       password: password,
     });
   }
 
-  logout(): Observable<any> {
+  logout(): Observable<Object> {
     return this.http.post(
       this.apiURL + '/Authentification/logout',
       {},
@@ -35,7 +35,7 @@ export class Authentification {
     );
   }
 
-  getUserInfo(): Observable<any> {
+  getUserInfo(): Observable<Object> {
     return this.http.get(this.apiURL + '/Authentification/manage/info', {
       withCredentials: true,
     });
