@@ -36,13 +36,13 @@ export class Register {
       password: '',
     },
     onSubmit: async ({ value }) => {
-      if (
+      const isValid =
         !value.email ||
         value.email.trim() === '' ||
         !value.password ||
-        value.password.trim() === ''
-      )
-        return;
+        value.password.trim() === '';
+
+      if (isValid) return;
 
       this.loader.set(true);
 
@@ -83,12 +83,9 @@ export class Register {
   }
 
   disableButton(): boolean {
-    if (
+    return (
       this.form.getFieldValue('email')?.trim() === '' ||
       this.form.getFieldValue('password')?.trim() === ''
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 }

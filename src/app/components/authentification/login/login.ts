@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { injectForm } from '@tanstack/angular-form';
 import { FloatLabel } from 'primeng/floatlabel';
@@ -31,7 +31,6 @@ export class Login {
   authentificationService = inject(Authentification);
   messageService = inject(MessageService);
   userServices = inject(UserServices);
-  constructor() {}
 
   toRegister() {
     window.location.href = '/register';
@@ -43,13 +42,12 @@ export class Login {
       password: '',
     },
     onSubmit: async ({ value }) => {
-      if (
+      const isValid =
         !value.email ||
         value.email.trim() === '' ||
         !value.password ||
-        value.password.trim() === ''
-      )
-        return;
+        value.password.trim() === '';
+      if (isValid) return;
 
       this.form.reset();
 
@@ -81,12 +79,9 @@ export class Login {
   }
 
   disableButton(): boolean {
-    if (
+    return (
       this.form.getFieldValue('email')?.trim() === '' ||
       this.form.getFieldValue('password')?.trim() === ''
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 }
