@@ -12,6 +12,7 @@ import { StudentsService } from '../../services/students/students-service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { UserServices } from '../../services/user/user-services';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,12 +38,14 @@ export class Dashboard {
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
+  userServices = inject(UserServices);
 
   constructor() {
     this.StudentsService.getAllData()?.subscribe((x) => {
       this.students.set(x);
       this.filteredStudents.set([...this.students()]);
       this.loaderStudents.set(false);
+      this.userServices.updateUser();
     });
   }
 

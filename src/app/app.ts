@@ -1,7 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { UserServices } from './services/user/user-services';
+import { Authentification } from './services/authentification/authentification-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +13,16 @@ import { ToastModule } from 'primeng/toast';
 })
 export class App {
   protected readonly title = signal('ProjetAngular');
+  userServices = inject(UserServices);
+  authentificationService = inject(Authentification);
+  router = inject(Router);
+
+  logout() {
+    this.userServices.user.set('');
+    this.authentificationService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+    });
+  }
 }

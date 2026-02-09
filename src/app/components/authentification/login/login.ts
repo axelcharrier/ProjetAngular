@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
 import { Authentification } from '../../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
+import { UserServices } from '../../../services/user/user-services';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ export class Login {
   router = inject(Router);
   authentificationService = inject(Authentification);
   messageService = inject(MessageService);
+  userServices = inject(UserServices);
   constructor() {}
 
   toRegister() {
@@ -55,6 +57,7 @@ export class Login {
 
       this.authentificationService.login(value.email, value.password).subscribe({
         next: () => {
+          this.userServices.updateUser();
           this.router.navigate(['/']);
           this.loaderNewStudent.set(false);
         },

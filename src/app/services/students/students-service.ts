@@ -3,6 +3,8 @@ import { Student } from '../../interfaces/student';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { UserServices } from '../user/user-services';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +13,9 @@ export class StudentsService {
   data: Student[] = [];
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
+  userServices = inject(UserServices);
+  isLoggedIn = this.userServices.user() !== '';
+  router = inject(Router);
 
   getAllData(): Observable<Student[]> {
     return this.http.get<Student[]>(this.apiURL + '/students', { withCredentials: true });
