@@ -1,7 +1,15 @@
 <main>
   <section>
     <header>
-      <h1 i18n>Student management</h1>
+      <div class="flex flex-row justify-between items-center m-1">
+        <h1 i18n>Student management</h1>
+        @if (this.userServices.user?.() !== null) {
+          <div class="flex flex-col items-end">
+            <p>Connected as {{ this.userServices.user?.() }}</p>
+            <button class="p-button p-button-secondary" (click)="logout()" i18n>Logout</button>
+          </div>
+        }
+      </div>
     </header>
   </section>
   <p-toast />

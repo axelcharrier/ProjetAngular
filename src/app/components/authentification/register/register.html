@@ -1,0 +1,54 @@
+<div>
+  <div class="p-2 flex justify-center w-full">
+    <div class="w-full">
+      <div>
+        <h2 i18n>Create Account</h2>
+        <p>You need to be connected to access to this feature.</p>
+      </div>
+      <!-- On met le form en plein milieu -->
+      <form (submit)="handleSubmit($event)" class="w-full">
+        <div class="flex flex-col justify-between items-center gap-5 m-5">
+          <ng-container [tanstackField]="form" name="email" #email="field">
+            <p-floatLabel>
+              <input
+                pInputText
+                [name]="email.api.name"
+                [value]="email.api.state.value"
+                (blur)="email.api.handleBlur()"
+                (input)="email.api.handleChange($any($event).target.value)"
+              />
+              <label [for]="email.api.name" i18n>Email</label>
+            </p-floatLabel>
+          </ng-container>
+
+          <ng-container [tanstackField]="form" name="password" #password="field">
+            <p-floatLabel>
+              <input
+                pInputText
+                type="password"
+                [name]="password.api.name"
+                [value]="password.api.state.value"
+                (blur)="password.api.handleBlur()"
+                (input)="password.api.handleChange($any($event).target.value)"
+              />
+              <label [for]="password.api.name" i18n>Password</label>
+            </p-floatLabel>
+          </ng-container>
+          <div class="flex flex-col justify-center items-center gap-2">
+            <button pButton type="submit" class="primary" [disabled]="disableButton()">
+              @if (loader()) {
+                <p-progress-spinner
+                  ariaLabel="loading"
+                  [style]="{ width: '25px', height: '25px' }"
+                />
+              } @else {
+                Sign up
+              }
+            </button>
+            <p class="text-xs">You already have an account ? <a href="/login">login</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

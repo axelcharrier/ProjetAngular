@@ -4,8 +4,8 @@ import { UpdateForm } from './update-form';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs/internal/observable/of';
 import { MessageService } from 'primeng/api';
-import { StudentsService } from '../../services/students-service';
-import { StudentsServiceMock } from '../../services/students-service-mock';
+import { StudentsService } from '../../services/students/students-service';
+import { StudentsServiceMock } from '../../services/students/students-service-mock';
 
 describe('UpdateForm', () => {
   let component: UpdateForm;

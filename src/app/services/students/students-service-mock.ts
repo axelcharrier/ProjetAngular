@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Student } from '../interfaces/student';
+import { Student } from '../../interfaces/student';
 import { of } from 'rxjs';
 
 @Injectable({
