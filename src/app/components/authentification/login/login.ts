@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 import { Authentification } from '../../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../../services/user/user-services';
+import { LoginPage } from '../../../helpers/pages-helper';
+import { HomePage } from '../../../helpers/pages-helper';
+import { RegisterPage } from '../../../helpers/pages-helper';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +36,7 @@ export class Login {
   userServices = inject(UserServices);
 
   toRegister() {
-    window.location.href = '/register';
+    this.router.navigate([RegisterPage.path]);
   }
 
   form = injectForm({
@@ -56,7 +59,7 @@ export class Login {
       this.authentificationService.login(value.email, value.password).subscribe({
         next: () => {
           this.userServices.updateUser();
-          this.router.navigate(['/']);
+          this.router.navigate([HomePage.path]);
           this.loaderNewStudent.set(false);
         },
         error: (err) => {
@@ -65,7 +68,7 @@ export class Login {
             summary: 'Error',
             detail: 'Error during login, please try again.',
           });
-          this.router.navigate(['/login']);
+          this.router.navigate([LoginPage.path]);
           this.loaderNewStudent.set(false);
         },
       });

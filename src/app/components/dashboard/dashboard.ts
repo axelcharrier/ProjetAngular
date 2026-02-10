@@ -13,6 +13,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
+import { UpdatePage } from '../../helpers/pages-helper';
 
 @Component({
   selector: 'app-dashboard',
@@ -130,6 +131,6 @@ export class Dashboard {
   }
 
   toUpdatePage(id: number) {
-    this.router.navigate(['/update', id]);
+    this.router.navigate([UpdatePage.buildPath(id)]);
   }
 }

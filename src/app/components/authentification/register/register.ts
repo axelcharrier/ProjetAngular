@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Authentification } from '../../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { HomePage, LoginPage } from '../../../helpers/pages-helper';
 
 @Component({
   selector: 'app-register',
@@ -27,8 +28,7 @@ export class Register {
   authentificationService = inject(Authentification);
   messageService = inject(MessageService);
   router = inject(Router);
-
-  constructor() {}
+  LoginPage = LoginPage;
 
   form = injectForm({
     defaultValues: {
@@ -50,7 +50,7 @@ export class Register {
         next: () => {
           this.authentificationService.login(value.email, value.password).subscribe({
             next: () => {
-              this.router.navigate(['/']);
+              this.router.navigate([HomePage.path]);
             },
             error: (err) => {
               this.messageService.add({
@@ -58,7 +58,7 @@ export class Register {
                 summary: 'Error',
                 detail: 'Error during login, please try to login manually.',
               });
-              this.router.navigate(['/login']);
+              this.router.navigate([LoginPage.path]);
               this.loader.set(false);
             },
           });
