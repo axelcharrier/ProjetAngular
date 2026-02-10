@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 // This service is used to manage the user, it will be used to get the user info and update the user info
 export class UserServices {
   authentification = inject(Authentification);
-  user? = signal('');
+  user? = signal<string | null>(null);
   router = inject(Router);
 
   updateUser() {
