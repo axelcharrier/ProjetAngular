@@ -1,28 +1,4 @@
 import { Routes } from '@angular/router';
-import { Home } from './components/home/home';
-import { UpdateForm } from './components/update-form/update-form';
-import { Register } from './components/authentification/register/register';
-import { Login } from './components/authentification/login/login';
+import { HomePage, UpdatePage, RegisterPage, LoginPage } from './helpers/pages-helper';
 
-export const routes: Routes = [
-  {
-    path: '',
-    component: Home,
-    title: 'Home',
-  },
-  {
-    path: 'update/:id',
-    component: UpdateForm,
-    title: 'Update Student',
-  },
-  {
-    path: 'register',
-    component: Register,
-    title: 'Register',
-  },
-  {
-    path: 'login',
-    component: Login,
-    title: 'Login',
-  },
-];
+export const routes: Routes = [HomePage, UpdatePage, RegisterPage, LoginPage];

@@ -5,6 +5,7 @@ import { ToastModule } from 'primeng/toast';
 import { UserServices } from './services/user/user-services';
 import { Authentification } from './services/authentification/authentification-services';
 import { Router } from '@angular/router';
+import { LoginPage } from './helpers/pages-helper';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class App {
     this.userServices.user?.set('');
     this.authentificationService.logout().subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        this.router.navigate([LoginPage.path]);
       },
     });
   }
