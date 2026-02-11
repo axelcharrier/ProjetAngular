@@ -14,14 +14,14 @@ export class Authentification {
 
   login(username: string, password: string): Observable<Object> {
     return this.http.post(
-      this.apiURL + '/Authentification/login',
+      this.apiURL + 'login',
       { email: username, password: password },
       { params: new HttpParams().append('useCookies', 'true'), withCredentials: true },
     );
   }
 
   register(username: string, password: string): Observable<Object> {
-    return this.http.post(this.apiURL + '/Authentification/register', {
+    return this.http.post(this.apiURL + 'register', {
       email: username,
       password: password,
     });
@@ -29,14 +29,14 @@ export class Authentification {
 
   logout(): Observable<Object> {
     return this.http.post(
-      this.apiURL + '/Authentification/logout',
+      this.apiURL + 'logout',
       {},
       { withCredentials: true, observe: 'response', responseType: 'text' },
     );
   }
 
   getUserInfo(): Observable<Object> {
-    return this.http.get(this.apiURL + '/Authentification/manage/info', {
+    return this.http.get(this.apiURL + 'manage/info', {
       withCredentials: true,
     });
   }
