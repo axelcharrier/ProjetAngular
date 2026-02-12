@@ -1,9 +1,9 @@
-<div>
-  <div class="m-2 flex justify-between">
+<div class="h-[80vh]">
+  <div class="p-2 flex justify-between">
     <div>
       <h2 i18n>Add a student</h2>
       <form (submit)="handleSubmit($event)">
-        <div class="flex flex-wrap items-end gap-5 m-5">
+        <div class="flex flex-wrap items-end gap-5 p-5">
           <ng-container [tanstackField]="form" name="firstName" #firstName="field">
             <p-floatLabel>
               <input
@@ -39,7 +39,7 @@
         </div>
       </form>
     </div>
-    <div class="flex flex-wrap items-end gap-4 m-5">
+    <div class="flex flex-wrap items-end gap-4 p-5">
       <p-floatlabel>
         <input pInputText name="filter" #filter />
         <label for="filter" i18n>Search by first name</label>
@@ -55,7 +55,12 @@
       <p-progress-spinner ariaLabel="loading" />
     </div>
   } @else {
-    <p-table [value]="filteredStudents()" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table
+      [value]="filteredStudents()"
+      [scrollable]="true"
+      scrollHeight="450px"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
       <ng-template #header>
         <tr>
           <th i18n>Last name</th>
