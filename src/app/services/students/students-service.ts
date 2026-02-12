@@ -14,7 +14,6 @@ export class StudentsService {
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
   userServices = inject(UserServices);
-  isLoggedIn = this.userServices.user?.() !== '';
   router = inject(Router);
 
   getAllData(): Observable<Student[]> {
