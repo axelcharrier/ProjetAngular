@@ -9,7 +9,7 @@
         </p-button>
       </div>
     </ng-template>
-    <form (submit)="handleSubmit($event)" class="m-3 flex flex-col gap-3">
+    <form (submit)="handleSubmitForm($event)" id="formEmail" class="m-3 flex flex-col gap-3">
       <div class="grid grid-cols-2 gap-5 m-auto">
         <ng-container [tanstackField]="form" name="email" #email="field">
           <p-floatLabel>
@@ -49,9 +49,13 @@
             <label [for]="role.api.name" i18n>Role</label>
           </p-floatLabel>
         </ng-container>
+        <p-button severity="info" (click)="isResetingPassword = !isResetingPassword" class="m-auto">
+          <i class="pi pi-replay" pButtonIcon></i>
+          <span pButtonLabel i18n>Reset Password</span>
+        </p-button>
       </div>
       <div class="flex m-auto gap-3">
-        <p-button class="m-auto" size="small" type="submit">
+        <p-button class="m-auto" size="small" for="formEmail" type="submit">
           <i class="pi pi-check" pButtonIcon></i>
           <span pButtonLabel i18n>Save</span>
         </p-button>
@@ -61,5 +65,48 @@
         </p-button>
       </div>
     </form>
+    @if (isResetingPassword) {
+      <div>
+        <p-divider align="center" type="dotted">
+          <b i18n>Reset Password</b>
+        </p-divider>
+        <form
+          (submit)="handleSubmitPassword($event)"
+          id="passwordForm"
+          class="m-3 flex flex-col gap-3 pt-5"
+        >
+          <div class="grid grid-cols-2 gap-5 m-auto">
+            <ng-container [tanstackField]="passwordForm" name="newPassword" #newPassword="field">
+              <p-floatLabel>
+                <input
+                  pInputText
+                  [name]="newPassword.api.name"
+                  [value]="newPassword.api.state.value"
+                  (blur)="newPassword.api.handleBlur()"
+                  (input)="newPassword.api.handleChange($any($event).target.value)"
+                />
+                <label [for]="newPassword.api.name" i18n>New Password</label>
+              </p-floatLabel>
+            </ng-container>
+            <ng-container [tanstackField]="passwordForm" name="oldPassword" #oldPassword="field">
+              <p-floatLabel>
+                <input
+                  pInputText
+                  [name]="oldPassword.api.name"
+                  [value]="oldPassword.api.state.value"
+                  (blur)="oldPassword.api.handleBlur()"
+                  (input)="oldPassword.api.handleChange($any($event).target.value)"
+                />
+                <label [for]="oldPassword.api.name" i18n>Old Password</label>
+              </p-floatLabel>
+            </ng-container>
+          </div>
+          <p-button class="m-auto" size="small" for="passwordForm" type="submit">
+            <i class="pi pi-check" pButtonIcon></i>
+            <span pButtonLabel i18n>Save</span>
+          </p-button>
+        </form>
+      </div>
+    }
   </p-card>
 </div>

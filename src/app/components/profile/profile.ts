@@ -9,10 +9,11 @@ import { Authentification } from '../../services/authentification/authentificati
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { Divider } from 'primeng/divider';
 
 @Component({
   selector: 'app-profile',
-  imports: [CardModule, InputText, TanStackField, FloatLabel, Button],
+  imports: [CardModule, InputText, TanStackField, FloatLabel, Button, Divider],
   templateUrl: './profile.html',
 })
 export class Profile {
@@ -22,6 +23,7 @@ export class Profile {
   location = inject(Location);
   router = inject(Router);
   user = this.userService.user;
+  isResetingPassword = false;
 
   constructor() {
     this.authentificationService.getUserInfo().subscribe((response) => {
@@ -29,12 +31,14 @@ export class Profile {
       this.user().isMailConfirmed.set(response.isMailConfirmed);
       this.user().role.set(response.role);
 
-      console.log(this.user().email());
       if (this.user().email() !== null) {
         this.form.setFieldValue('email', this.user().email() as string);
         this.form.setFieldValue('isMailConfirmed', this.user().isMailConfirmed());
         this.form.setFieldValue('role', this.user().role());
       }
+
+      this.passwordForm.setFieldValue('oldPassword', '');
+      this.passwordForm.setFieldValue('newPassword', '');
     });
   }
 
@@ -45,9 +49,7 @@ export class Profile {
       role: '',
     },
     onSubmit: async ({ value }) => {
-      console.log('before test', value.email);
       if (value.email) {
-        console.log(value.email);
         this.authentificationService.manageInfo(value.email, null, null).subscribe(() => {
           this.userService.updateUser();
           this.messageService.add({
@@ -60,14 +62,44 @@ export class Profile {
     },
   });
 
-  handleSubmit(event: SubmitEvent) {
+  passwordForm = injectForm({
+    defaultValues: {
+      oldPassword: '',
+      newPassword: '',
+    },
+    onSubmit: async ({ value }) => {
+      this.authentificationService
+        .manageInfo(null, value.newPassword, value.oldPassword)
+        .subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Password modified',
+            });
+            this.passwordForm.reset();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    },
+  });
+
+  handleSubmitForm(event: SubmitEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.form.handleSubmit();
   }
 
+  handleSubmitPassword(event: SubmitEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.passwordForm.handleSubmit();
+  }
+
   exit() {
-    this.location.back();
+    this.router.navigate(['/']);
   }
 
   logout() {
