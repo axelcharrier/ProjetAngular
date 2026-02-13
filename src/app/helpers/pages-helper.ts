@@ -1,5 +1,5 @@
 import { UpdateForm } from '../components/update-form/update-form';
-import { Login } from '../components/authentification/login/login';
+import { Login } from '../components/authentication/login/login';
 import { Profile } from '../components/profile/profile';
 import { Dashboard } from '../components/dashboard/dashboard';
 

@@ -8,7 +8,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Router } from '@angular/router';
-import { Authentification } from '../../../services/authentication/authentication-services';
+import { AuthenticationServices } from '../../../services/authentication/authentication-services';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../../services/user/user-services';
 import { LoginPage } from '../../../helpers/pages-helper';
@@ -30,7 +30,7 @@ import { HomePage } from '../../../helpers/pages-helper';
 export class Login {
   loaderNewStudent = signal(false);
   router = inject(Router);
-  authentificationService = inject(Authentification);
+  authenticationService = inject(AuthenticationServices);
   messageService = inject(MessageService);
   userServices = inject(UserServices);
 
@@ -51,7 +51,7 @@ export class Login {
 
       this.loaderNewStudent.set(true);
 
-      this.authentificationService.login(value.email, value.password).subscribe({
+      this.authenticationService.login(value.email, value.password).subscribe({
         next: () => {
           this.userServices.updateUser();
           this.router.navigate([HomePage.path]);

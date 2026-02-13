@@ -5,7 +5,7 @@ import { UserServices } from '../../services/user/user-services';
 import { InputText } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Button } from 'primeng/button';
-import { Authentification } from '../../services/authentication/authentication-services';
+import { AuthenticationServices } from '../../services/authentication/authentication-services';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Divider } from 'primeng/divider';
@@ -17,14 +17,14 @@ import { Divider } from 'primeng/divider';
 })
 export class Profile {
   userService = inject(UserServices);
-  authentificationService = inject(Authentification);
+  authenticationService = inject(AuthenticationServices);
   messageService = inject(MessageService);
   router = inject(Router);
   user = this.userService.user;
   isResetingPassword = false;
 
   constructor() {
-    this.authentificationService.getUserInfo().subscribe((response) => {
+    this.authenticationService.getUserInfo().subscribe((response) => {
       this.user().email.set(response.email);
       this.user().isMailConfirmed.set(response.isMailConfirmed);
       this.user().role.set(response.role);
@@ -48,7 +48,7 @@ export class Profile {
     },
     onSubmit: async ({ value }) => {
       if (value.email) {
-        this.authentificationService.manageInfo(value.email, null, null).subscribe(() => {
+        this.authenticationService.manageInfo(value.email, null, null).subscribe(() => {
           this.userService.updateUser();
           this.messageService.add({
             severity: 'success',
@@ -66,21 +66,19 @@ export class Profile {
       newPassword: '',
     },
     onSubmit: async ({ value }) => {
-      this.authentificationService
-        .manageInfo(null, value.newPassword, value.oldPassword)
-        .subscribe({
-          next: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Password modified',
-            });
-            this.passwordForm.reset();
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+      this.authenticationService.manageInfo(null, value.newPassword, value.oldPassword).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Password modified',
+          });
+          this.passwordForm.reset();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     },
   });
 
@@ -101,7 +99,7 @@ export class Profile {
   }
 
   logout() {
-    this.authentificationService.logout().subscribe(() => {
+    this.authenticationService.logout().subscribe(() => {
       this.userService.updateUser();
       this.router.navigate(['/login']);
     });

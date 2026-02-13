@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthentificationServicesMock {
+export class AuthenticationServicesMock {
   login(username: string, password: string): Observable<any> {
     return of();
   }

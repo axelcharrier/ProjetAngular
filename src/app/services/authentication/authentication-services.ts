@@ -8,8 +8,8 @@ import { User } from '../../interfaces/user';
   providedIn: 'root',
 })
 
-// This service is used to manage the authentification of the user, it will be used to login, register, logout and get the user info
-export class Authentification {
+// This service is used to manage the authentication of the user, it will be used to login, register, logout and get the user info
+export class AuthenticationServices {
   http: HttpClient = inject(HttpClient);
   apiURL = environment.ApiURL;
 
@@ -22,7 +22,7 @@ export class Authentification {
   }
 
   register(username: string, password: string): Observable<Object> {
-    return this.http.post(this.apiURL + '/register', {
+    return this.http.post(this.apiURL + '/createAccount', {
       email: username,
       password: password,
     });
