@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Register } from './register';
+import { Login } from './login';
 import { MessageService } from 'primeng/api';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { Authentification } from '../../../services/authentification/authentification-services';
-import { AuthentificationServicesMock } from '../../../services/authentification/authentification-services-mock';
+import { Authentification } from '../../../services/authentication/authentication-services';
+import { AuthentificationServicesMock } from '../../../services/authentication/authentification-services-mock';
 
-describe('Register', () => {
-  let component: Register;
-  let fixture: ComponentFixture<Register>;
+describe('Login', () => {
+  let component: Login;
+  let fixture: ComponentFixture<Login>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Register],
+      imports: [Login],
       providers: [
         MessageService,
         provideHttpClientTesting(),
@@ -20,7 +20,7 @@ describe('Register', () => {
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Register);
+    fixture = TestBed.createComponent(Login);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -5,9 +5,8 @@ import { UserServices } from '../../services/user/user-services';
 import { InputText } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
 import { Button } from 'primeng/button';
-import { Authentification } from '../../services/authentification/authentification-services';
+import { Authentification } from '../../services/authentication/authentication-services';
 import { MessageService } from 'primeng/api';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Divider } from 'primeng/divider';
 
@@ -20,7 +19,6 @@ export class Profile {
   userService = inject(UserServices);
   authentificationService = inject(Authentification);
   messageService = inject(MessageService);
-  location = inject(Location);
   router = inject(Router);
   user = this.userService.user;
   isResetingPassword = false;

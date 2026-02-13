@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Profile } from './profile';
+import { MessageService } from 'primeng/api';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { AuthentificationServicesMock } from '../../services/authentication/authentification-services-mock';
+import { AuthenticationServices } from '../../services/authentication/authentication-services';
 
 describe('Profile', () => {
   let component: Profile;
@@ -8,9 +12,13 @@ describe('Profile', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Profile]
-    })
-    .compileComponents();
+      imports: [Profile],
+      providers: [
+        MessageService,
+        provideHttpClientTesting,
+        { provide: AuthenticationServices, useClass: AuthentificationServicesMock },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Profile);
     component = fixture.componentInstance;

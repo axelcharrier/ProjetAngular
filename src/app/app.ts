@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { UserServices } from './services/user/user-services';
-import { Authentification } from './services/authentification/authentification-services';
+import { Authentification } from './services/authentication/authentication-services';
 import { Router } from '@angular/router';
 import { LoginPage } from './helpers/pages-helper';
 

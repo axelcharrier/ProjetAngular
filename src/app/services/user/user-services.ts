@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Authentification } from '../authentification/authentification-services';
+import { Authentification } from '../authentication/authentication-services';
 import { Router } from '@angular/router';
 
 @Injectable({
