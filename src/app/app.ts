@@ -18,12 +18,7 @@ export class App {
   authentificationService = inject(Authentification);
   router = inject(Router);
 
-  logout() {
-    this.userServices.user().email.set(null);
-    this.authentificationService.logout().subscribe({
-      next: () => {
-        this.router.navigate([LoginPage.path]);
-      },
-    });
+  toProfile() {
+    this.router.navigate(['/profile']);
   }
 }

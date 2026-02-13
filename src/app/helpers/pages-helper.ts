@@ -2,6 +2,7 @@ import { Home } from '../components/home/home';
 import { UpdateForm } from '../components/update-form/update-form';
 import { Register } from '../components/authentification/register/register';
 import { Login } from '../components/authentification/login/login';
+import { Profile } from '../components/profile/profile';
 
 export const HomePage = {
   path: '',
@@ -26,4 +27,10 @@ export const RegisterPage = {
   path: 'register',
   component: Register,
   title: 'Register',
+};
+
+export const ProfilePage = {
+  path: 'profile',
+  component: Profile,
+  title: 'profile',
 };

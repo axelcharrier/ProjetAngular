@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -35,10 +36,26 @@ export class Authentification {
     );
   }
 
-  getUserInfo(): Observable<Object> {
-    return this.http.get(this.apiURL + '/manage/info', {
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(this.apiURL + '/manage/info', {
       withCredentials: true,
     });
+  }
+
+  manageInfo(
+    mail: string | null,
+    newPassword: string | null,
+    oldPassword: string | null,
+  ): Observable<Object> {
+    return this.http.post(
+      this.apiURL + '/manage/info',
+      {
+        newEmail: mail,
+        newPassword: newPassword,
+        oldPassword: oldPassword,
+      },
+      { withCredentials: true, observe: 'response', responseType: 'text' },
+    );
   }
 
   // We may add the others services from Api but we don't need them for the moment
