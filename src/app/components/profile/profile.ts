@@ -8,6 +8,7 @@ import { Button } from 'primeng/button';
 import { Authentification } from '../../services/authentification/authentification-services';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,7 @@ export class Profile {
   authentificationService = inject(Authentification);
   messageService = inject(MessageService);
   location = inject(Location);
+  router = inject(Router);
   user = this.userService.user;
 
   constructor() {
@@ -66,5 +68,12 @@ export class Profile {
 
   exit() {
     this.location.back();
+  }
+
+  logout() {
+    this.authentificationService.logout().subscribe(() => {
+      this.userService.updateUser();
+      this.router.navigate(['/login']);
+    });
   }
 }
