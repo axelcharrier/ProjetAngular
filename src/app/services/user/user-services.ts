@@ -1,6 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { AuthenticationServices } from '../authentication/authentication-services';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +19,8 @@ export class UserServices {
     role: signal<string>(''),
   });
   router = inject(Router);
+  apiUrl = environment.ApiURL;
+  http: HttpClient = inject(HttpClient);
 
   updateUser() {
     const user = this.authentication.getUserInfo().subscribe({
@@ -25,5 +31,12 @@ export class UserServices {
       },
     });
     return this.user;
+  }
+
+  getAllUsers(): Observable<User[]> {
+    const users = this.http.get<User[]>(this.apiUrl + '/getAllUsers', {
+      withCredentials: true,
+    });
+    return users;
   }
 }
