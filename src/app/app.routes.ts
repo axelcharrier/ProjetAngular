@@ -5,6 +5,14 @@ import {
   LoginPage,
   ProfilePage,
   UsersDashboardPage,
+  UserUpdatePage,
 } from './helpers/pages-helper';
 
-export const routes: Routes = [HomePage, UpdatePage, LoginPage, ProfilePage, UsersDashboardPage];
+export const routes: Routes = [
+  HomePage,
+  UpdatePage,
+  LoginPage,
+  ProfilePage,
+  UsersDashboardPage,
+  UserUpdatePage,
+];

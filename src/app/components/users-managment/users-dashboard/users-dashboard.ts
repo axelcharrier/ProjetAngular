@@ -3,6 +3,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { User } from '../../../interfaces/user';
 import { UserServices } from '../../../services/user/user-services';
+import { Router } from '@angular/router';
+import { UserUpdatePage } from '../../../helpers/pages-helper';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -11,11 +13,16 @@ import { UserServices } from '../../../services/user/user-services';
 })
 export class UsersDashboard {
   userService = inject(UserServices);
+  router = inject(Router);
   users = signal<User[]>([]);
 
   constructor() {
     this.userService.getAllUsers().subscribe((response) => {
       return this.users.set(response);
     });
+  }
+
+  toUpdate(mail: string) {
+    this.router.navigate([UserUpdatePage.buildpath(mail)]);
   }
 }

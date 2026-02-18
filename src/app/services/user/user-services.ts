@@ -34,9 +34,26 @@ export class UserServices {
   }
 
   getAllUsers(): Observable<User[]> {
-    const users = this.http.get<User[]>(this.apiUrl + '/getAllUsers', {
+    const users = this.http.get<User[]>(this.apiUrl + '/users', {
       withCredentials: true,
     });
     return users;
+  }
+
+  getUserByMail(mail: string): Observable<User> {
+    const user = this.http.get<User>(this.apiUrl + '/users/bymail', {
+      params: {
+        mail: mail,
+      },
+      withCredentials: true,
+    });
+    return user;
+  }
+
+  modifyUser(user: User): Observable<User> {
+    const userResponse = this.http.put<User>(this.apiUrl + '/users', user, {
+      withCredentials: true,
+    });
+    return userResponse;
   }
 }

@@ -20,7 +20,7 @@
         <td>{{ users.role }}</td>
         <td class="flex flex-wrap items-end gap-4">
           <p-button i18n-label severity="danger" label="Delete" />
-          <p-button i18n-label label="Update" severity="info" />
+          <p-button i18n-label label="Update" severity="info" (click)="toUpdate(users.mail)" />
         </td>
       </tr>
     </ng-template>

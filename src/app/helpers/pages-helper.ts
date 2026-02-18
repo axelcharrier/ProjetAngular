@@ -4,6 +4,7 @@ import { Profile } from '../components/profile/profile';
 import { Dashboard } from '../components/dashboard/dashboard';
 import path from 'path';
 import { UsersDashboard } from '../components/users-managment/users-dashboard/users-dashboard';
+import { UsersUpdate } from '../components/users-managment/users-update/users-update';
 
 export const HomePage = {
   path: '',
@@ -34,4 +35,11 @@ export const UsersDashboardPage = {
   path: 'users-dashboard',
   component: UsersDashboard,
   title: 'users-dashboard',
+};
+
+export const UserUpdatePage = {
+  path: 'user-update/:mail',
+  component: UsersUpdate,
+  buildpath: (mail: string) => `user-update/${mail}`,
+  title: 'user-dashboard',
 };

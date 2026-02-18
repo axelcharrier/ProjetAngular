@@ -1,0 +1,52 @@
+<div class="h-[80vh]">
+  <h2 class="p-2" i18n>Edit student</h2>
+  <div class="flex flex-row justify-center">
+    <form (submit)="handleSubmit($event)">
+      <div class="flex flex-col items-center gap-5 p-5">
+        <ng-container [tanstackField]="form" name="mail" #mail="field">
+          <p-floatlabel>
+            <label [for]="mail.api.name" i18n>Mail</label>
+            <input
+              pInputText
+              [name]="mail.api.name"
+              [(ngModel)]="mail.api.state.value"
+              (blur)="mail.api.handleBlur()"
+              (input)="mail.api.handleChange($any($event).target.value)"
+              disabled="True"
+            />
+          </p-floatlabel>
+        </ng-container>
+
+        <ng-container [tanstackField]="form" name="isMailConfirmed" #isMailConfirmed="field">
+          <div class="flex flew-row justify-between w-full">
+            <label [for]="isMailConfirmed.api.name" i18n>IsMailConfirmed</label>
+            <p-toggleswitch
+              [name]="isMailConfirmed.api.name"
+              [(ngModel)]="isMailConfirmed.api.state.value"
+              (blur)="isMailConfirmed.api.handleBlur()"
+              (onChange)="isMailConfirmed.api.handleChange(isMailConfirmed.api.state.value)"
+            />
+          </div>
+        </ng-container>
+
+        <ng-container [tanstackField]="form" name="role" #role="field">
+          <div class="flex flex-col w-full">
+            <label [for]="role.api.name" i18n>Role</label>
+            <p-selectbutton
+              [name]="role.api.name"
+              [(ngModel)]="role.api.state.value"
+              [options]="roles"
+              (optionLabel)="(role.api.state.value)"
+              (optionValue)="(role.api.state.value)"
+              aria-labelledby="basic"
+              (onChange)="role.api.handleChange(role.api.state.value)"
+              fluid
+              required
+            />
+          </div>
+        </ng-container>
+        <button pButton type="submit" class="primary" i18n>Update</button>
+      </div>
+    </form>
+  </div>
+</div>
