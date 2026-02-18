@@ -1,0 +1,112 @@
+<div class="h-[80vh] flex flex-row justify-center">
+  <p-card class="w-[30%] h-fit m-auto">
+    <ng-template #header>
+      <div class="flex flex-row justify-between items-center m-3">
+        <h1 i18n>Edit your profile</h1>
+        <p-button severity="danger" size="small" (click)="logout()">
+          <i class="pi pi-sign-out" pButtonIcon></i>
+          <span pButtonLabel i18n>Logout</span>
+        </p-button>
+      </div>
+    </ng-template>
+    <form (submit)="handleSubmitForm($event)" id="formEmail" class="m-3 flex flex-col gap-3">
+      <div class="grid grid-cols-2 gap-5 m-auto">
+        <ng-container [tanstackField]="form" name="email" #email="field">
+          <p-floatLabel>
+            <input
+              pInputText
+              [name]="email.api.name"
+              [value]="email.api.state.value"
+              (blur)="email.api.handleBlur()"
+              (input)="email.api.handleChange($any($event).target.value)"
+            />
+            <label [for]="email.api.name" i18n>Mail address</label>
+          </p-floatLabel>
+        </ng-container>
+        <ng-container [tanstackField]="form" name="isMailConfirmed" #isMailConfirmed="field">
+          <p-floatLabel>
+            <input
+              pInputText
+              [name]="isMailConfirmed.api.name"
+              [value]="isMailConfirmed.api.state.value"
+              (blur)="isMailConfirmed.api.handleBlur()"
+              disabled="true"
+              (input)="isMailConfirmed.api.handleChange($any($event).target.value)"
+            />
+            <label [for]="isMailConfirmed.api.name" i18n>Email confirmed</label>
+          </p-floatLabel>
+        </ng-container>
+        <ng-container [tanstackField]="form" name="role" #role="field">
+          <p-floatLabel>
+            <input
+              pInputText
+              [name]="role.api.name"
+              [value]="role.api.state.value"
+              (blur)="role.api.handleBlur()"
+              disabled="true"
+              (input)="role.api.handleChange($any($event).target.value)"
+            />
+            <label [for]="role.api.name" i18n>Role</label>
+          </p-floatLabel>
+        </ng-container>
+        <p-button severity="info" (click)="isResetingPassword = !isResetingPassword" class="m-auto">
+          <i class="pi pi-replay" pButtonIcon></i>
+          <span pButtonLabel i18n>Reset Password</span>
+        </p-button>
+      </div>
+      <div class="flex m-auto gap-3">
+        <p-button class="m-auto" size="small" for="formEmail" type="submit">
+          <i class="pi pi-check" pButtonIcon></i>
+          <span pButtonLabel i18n>Save</span>
+        </p-button>
+        <p-button class="m-auto" size="small" (click)="exit()" severity="secondary">
+          <i class="pi pi-times" pButtonIcon></i>
+          <span pButtonLabel i18n>Exit</span>
+        </p-button>
+      </div>
+    </form>
+    @if (isResetingPassword) {
+      <div>
+        <p-divider align="center" type="dotted">
+          <b i18n>Reset Password</b>
+        </p-divider>
+        <form
+          (submit)="handleSubmitPassword($event)"
+          id="passwordForm"
+          class="m-3 flex flex-col gap-3 pt-5"
+        >
+          <div class="grid grid-cols-2 gap-5 m-auto">
+            <ng-container [tanstackField]="passwordForm" name="newPassword" #newPassword="field">
+              <p-floatLabel>
+                <input
+                  pInputText
+                  [name]="newPassword.api.name"
+                  [value]="newPassword.api.state.value"
+                  (blur)="newPassword.api.handleBlur()"
+                  (input)="newPassword.api.handleChange($any($event).target.value)"
+                />
+                <label [for]="newPassword.api.name" i18n>New Password</label>
+              </p-floatLabel>
+            </ng-container>
+            <ng-container [tanstackField]="passwordForm" name="oldPassword" #oldPassword="field">
+              <p-floatLabel>
+                <input
+                  pInputText
+                  [name]="oldPassword.api.name"
+                  [value]="oldPassword.api.state.value"
+                  (blur)="oldPassword.api.handleBlur()"
+                  (input)="oldPassword.api.handleChange($any($event).target.value)"
+                />
+                <label [for]="oldPassword.api.name" i18n>Old Password</label>
+              </p-floatLabel>
+            </ng-container>
+          </div>
+          <p-button class="m-auto" size="small" for="passwordForm" type="submit">
+            <i class="pi pi-check" pButtonIcon></i>
+            <span pButtonLabel i18n>Save</span>
+          </p-button>
+        </form>
+      </div>
+    }
+  </p-card>
+</div>

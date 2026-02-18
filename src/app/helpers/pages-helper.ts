@@ -1,11 +1,11 @@
-import { Home } from '../components/home/home';
 import { UpdateForm } from '../components/update-form/update-form';
-import { Register } from '../components/authentification/register/register';
-import { Login } from '../components/authentification/login/login';
+import { Login } from '../components/authentication/login/login';
+import { Profile } from '../components/profile/profile';
+import { Dashboard } from '../components/dashboard/dashboard';
 
 export const HomePage = {
   path: '',
-  component: Home,
+  component: Dashboard,
   title: 'Home',
 };
 
@@ -22,8 +22,8 @@ export const LoginPage = {
   title: 'Login',
 };
 
-export const RegisterPage = {
-  path: 'register',
-  component: Register,
-  title: 'Register',
+export const ProfilePage = {
+  path: 'profile',
+  component: Profile,
+  title: 'profile',
 };

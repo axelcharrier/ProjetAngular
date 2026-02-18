@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { DividerModule } from 'primeng/divider';
 import { injectForm } from '@tanstack/angular-form';
 import { FloatLabel } from 'primeng/floatlabel';
 import { TanStackField } from '@tanstack/angular-form';
@@ -6,29 +7,32 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { Authentification } from '../../../services/authentification/authentification-services';
-import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { HomePage, LoginPage } from '../../../helpers/pages-helper';
+import { AuthenticationServices } from '../../../services/authentication/authentication-services';
+import { MessageService } from 'primeng/api';
+import { UserServices } from '../../../services/user/user-services';
+import { LoginPage } from '../../../helpers/pages-helper';
+import { HomePage } from '../../../helpers/pages-helper';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   imports: [
+    ButtonModule,
+    DividerModule,
+    InputTextModule,
     FloatLabel,
     TanStackField,
     ProgressSpinnerModule,
     PasswordModule,
-    ButtonModule,
-    InputTextModule,
   ],
-  templateUrl: './register.html',
+  templateUrl: './login.html',
 })
-export class Register {
-  loader = signal(false);
-  authentificationService = inject(Authentification);
-  messageService = inject(MessageService);
+export class Login {
+  loaderNewStudent = signal(false);
   router = inject(Router);
-  LoginPage = LoginPage;
+  authenticationService = inject(AuthenticationServices);
+  messageService = inject(MessageService);
+  userServices = inject(UserServices);
 
   form = injectForm({
     defaultValues: {
@@ -41,38 +45,28 @@ export class Register {
         value.email.trim() === '' ||
         !value.password ||
         value.password.trim() === '';
-
       if (isValid) return;
 
-      this.loader.set(true);
+      this.form.reset();
 
-      this.authentificationService.register(value.email, value.password).subscribe({
+      this.loaderNewStudent.set(true);
+
+      this.authenticationService.login(value.email, value.password).subscribe({
         next: () => {
-          this.authentificationService.login(value.email, value.password).subscribe({
-            next: () => {
-              this.router.navigate([HomePage.path]);
-            },
-            error: (err) => {
-              this.messageService.add({
-                severity: 'error',
-                summary: 'Error',
-                detail: 'Error during login, please try to login manually.',
-              });
-              this.router.navigate([LoginPage.path]);
-              this.loader.set(false);
-            },
-          });
+          this.userServices.updateUser();
+          this.router.navigate([HomePage.path]);
+          this.loaderNewStudent.set(false);
         },
         error: (err) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Error during registration, please try again.',
+            detail: 'Error during login, please try again.',
           });
-          this.loader.set(false);
+          this.router.navigate([LoginPage.path]);
+          this.loaderNewStudent.set(false);
         },
       });
-      this.form.reset();
     },
   });
 
