@@ -56,4 +56,14 @@ export class UserServices {
     });
     return userResponse;
   }
+
+  deleteUser(mail: string): Observable<string> {
+    const isUserDeleted = this.http.delete<string>(this.apiUrl + '/users', {
+      params: {
+        mail: mail,
+      },
+      withCredentials: true,
+    });
+    return isUserDeleted;
+  }
 }

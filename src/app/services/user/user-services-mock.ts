@@ -20,4 +20,8 @@ export class UserServicesMock {
   modifyUser() {
     return of({ email: 'test@test.com', isMailConfirmed: true, role: 'Teacher' });
   }
+
+  deleteUser(mail: string) {
+    return of('test@test.com');
+  }
 }

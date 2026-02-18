@@ -25,4 +25,12 @@ export class UsersDashboard {
   toUpdate(mail: string) {
     this.router.navigate([UserUpdatePage.buildpath(mail)]);
   }
+
+  delete(mail: string) {
+    this.userService.deleteUser(mail).subscribe((mailReturned) => {
+      this.users.update((datas) => datas.filter((user) => user.mail != mailReturned));
+    });
+
+    return this.users;
+  }
 }
