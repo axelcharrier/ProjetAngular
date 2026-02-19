@@ -5,10 +5,11 @@ import { User } from '../../../interfaces/user';
 import { UserServices } from '../../../services/user/user-services';
 import { Router } from '@angular/router';
 import { UserUpdatePage } from '../../../helpers/pages-helper';
+import { CreateUserForm } from './create-user-form/create-user-form';
 
 @Component({
   selector: 'app-users-dashboard',
-  imports: [ButtonModule, TableModule],
+  imports: [ButtonModule, TableModule, CreateUserForm],
   templateUrl: './users-dashboard.html',
 })
 export class UsersDashboard {
