@@ -17,7 +17,6 @@ export class App {
   userServices = inject(UserServices);
   authenticationService = inject(AuthenticationServices);
   router = inject(Router);
-  route: ActivatedRoute = inject(ActivatedRoute);
 
   toProfile() {
     this.router.navigate([ProfilePage.path]);
