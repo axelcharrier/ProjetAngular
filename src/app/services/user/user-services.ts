@@ -1,6 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { AuthenticationServices } from '../authentication/authentication-services';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +19,8 @@ export class UserServices {
     role: signal<string>(''),
   });
   router = inject(Router);
+  apiUrl = environment.ApiURL;
+  http: HttpClient = inject(HttpClient);
 
   updateUser() {
     const user = this.authentication.getUserInfo().subscribe({
@@ -25,5 +31,39 @@ export class UserServices {
       },
     });
     return this.user;
+  }
+
+  getAllUsers(): Observable<User[]> {
+    const users = this.http.get<User[]>(this.apiUrl + '/users', {
+      withCredentials: true,
+    });
+    return users;
+  }
+
+  getUserByMail(mail: string): Observable<User> {
+    const user = this.http.get<User>(this.apiUrl + '/users/bymail', {
+      params: {
+        mail: mail,
+      },
+      withCredentials: true,
+    });
+    return user;
+  }
+
+  modifyUser(user: User): Observable<User> {
+    const userResponse = this.http.put<User>(this.apiUrl + '/users', user, {
+      withCredentials: true,
+    });
+    return userResponse;
+  }
+
+  deleteUser(mail: string): Observable<string> {
+    const isUserDeleted = this.http.delete<string>(this.apiUrl + '/users', {
+      params: {
+        mail: mail,
+      },
+      withCredentials: true,
+    });
+    return isUserDeleted;
   }
 }

@@ -1,0 +1,28 @@
+<div class="h-[80vh]">
+  <p-table
+    [scrollable]="true"
+    scrollHeight="450px"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [value]="users()"
+  >
+    <ng-template #header>
+      <tr>
+        <th i18n>Mail</th>
+        <th i18n>Is mail confirmed ?</th>
+        <th i18n>Role</th>
+        <th i18n>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-users>
+      <tr>
+        <td>{{ users.mail }}</td>
+        <td>{{ users.isMailConfirmed }}</td>
+        <td>{{ users.role }}</td>
+        <td class="flex flex-wrap items-end gap-4">
+          <p-button i18n-label severity="danger" label="Delete" (click)="delete(users.mail)" />
+          <p-button i18n-label label="Update" severity="info" (click)="toUpdate(users.mail)" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

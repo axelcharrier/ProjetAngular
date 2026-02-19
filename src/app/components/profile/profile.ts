@@ -25,7 +25,7 @@ export class Profile {
 
   constructor() {
     this.authenticationService.getUserInfo().subscribe((response) => {
-      this.user().email.set(response.email);
+      this.user().email.set(response.mail);
       this.user().isMailConfirmed.set(response.isMailConfirmed);
       this.user().role.set(response.role);
 
