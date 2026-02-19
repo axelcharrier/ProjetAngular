@@ -2,24 +2,31 @@
   <section class="h-[10vh]">
     <header>
       <div class="flex flex-row justify-between items-center">
-        <h1 i18n class="p-1">Student management</h1>
+        <h1 class="p-1">StudentApp</h1>
       </div>
     </header>
   </section>
   <p-toast />
   <router-outlet />
   <footer class="h-[10vh]">
-    @if (this.userServices.user().email()) {
-      <div class="flex flex-row justify-end items-center gap-2">
-        <p>{{ this.userServices.user().email() }}</p>
-        <p-button
-          icon="pi pi-user"
-          (click)="toProfile()"
-          [rounded]="true"
-          [text]="true"
-          severity="secondary"
-        />
-      </div>
-    }
+    <div class="flex flex-row justify-between items-center m-3">
+      @if (this.router.url === '/users-dashboard') {
+        <a pButton href="" i18n severity="secondary">Students managment</a>
+      } @else {
+        <a pButton href="/users-dashboard" i18n severity="secondary">Users managment</a>
+      }
+      @if (this.userServices.user().email()) {
+        <div class="flex flex-row justify-end items-center gap-2">
+          <p>{{ this.userServices.user().email() }}</p>
+          <p-button
+            icon="pi pi-user"
+            (click)="toProfile()"
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+          />
+        </div>
+      }
+    </div>
   </footer>
 </main>

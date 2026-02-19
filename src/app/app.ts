@@ -1,11 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { UserServices } from './services/user/user-services';
 import { AuthenticationServices } from './services/authentication/authentication-services';
-import { Router } from '@angular/router';
-import { LoginPage } from './helpers/pages-helper';
+import { Router, Route } from '@angular/router';
+import { ProfilePage } from './helpers/pages-helper';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,9 @@ export class App {
   userServices = inject(UserServices);
   authenticationService = inject(AuthenticationServices);
   router = inject(Router);
+  route: ActivatedRoute = inject(ActivatedRoute);
 
   toProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate([ProfilePage.path]);
   }
 }
