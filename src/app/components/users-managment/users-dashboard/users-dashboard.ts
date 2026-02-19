@@ -18,6 +18,7 @@ export class UsersDashboard {
 
   constructor() {
     this.userService.getAllUsers().subscribe((response) => {
+      this.userService.updateUser();
       return this.users.set(response);
     });
   }
