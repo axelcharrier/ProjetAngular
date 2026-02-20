@@ -11,20 +11,22 @@
             [(ngModel)]="email.api.state.value"
             (blur)="email.api.handleBlur()"
             (input)="email.api.handleChange($any($event).target.value)"
+            required
           />
         </p-floatLabel>
       </ng-container>
 
       <ng-container [tanstackField]="form" name="password" #password="field">
         <p-floatLabel>
-          <label [for]="password.api.name">Password</label>
-          <input
-            pInputText
+          <p-password
+            [toggleMask]="true"
             [name]="password.api.name"
             [(ngModel)]="password.api.state.value"
             (blur)="password.api.handleBlur()"
             (input)="password.api.handleChange($any($event).target.value)"
+            required
           />
+          <label [for]="password.api.name">Password</label>
         </p-floatLabel>
       </ng-container>
 
@@ -34,29 +36,38 @@
         #passwordConfirmation="field"
       >
         <p-floatLabel>
-          <label [for]="passwordConfirmation.api.name">Password confirmation</label>
-          <input
-            pInputText
+          <p-password
+            [toggleMask]="true"
             [name]="passwordConfirmation.api.name"
             [(ngModel)]="passwordConfirmation.api.state.value"
             (blur)="passwordConfirmation.api.handleBlur()"
             (input)="passwordConfirmation.api.handleChange($any($event).target.value)"
+            [required]="true"
           />
+          <label [for]="passwordConfirmation.api.name">Password confirmation</label>
         </p-floatLabel>
       </ng-container>
 
       <ng-container [tanstackField]="form" name="role" #role="field">
-        <p-select
-          [name]="role.api.name"
-          [(ngModel)]="role.api.state.value"
-          variant="filled"
-          placeholder="Select a role"
-          [options]="roles"
-          (onChange)="role.api.handleChange(role.api.state.value)"
-        />
+        <div class="w-50">
+          <p-floatLabel>
+            <p-select
+              [name]="role.api.name"
+              [(ngModel)]="role.api.state.value"
+              variant="filled"
+              [options]="roles"
+              (onChange)="role.api.handleChange(role.api.state.value)"
+              fluid
+              required
+            />
+            <label [for]="role.api.name">Select a role</label>
+          </p-floatLabel>
+        </div>
       </ng-container>
 
-      <p-button type="submit" severity="primary" i18n-label label="Save" />
+      <button pButton type="submit" severity="primary" [disabled]="disableButton()" i18n>
+        Save
+      </button>
     </div>
   </form>
 </div>
