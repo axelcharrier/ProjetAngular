@@ -47,8 +47,6 @@ export class Login {
         value.password.trim() === '';
       if (isValid) return;
 
-      this.form.reset();
-
       this.loaderNewStudent.set(true);
 
       this.authenticationService.login(value.email, value.password).subscribe({
