@@ -21,11 +21,16 @@ export class AuthenticationServices {
     );
   }
 
-  register(username: string, password: string): Observable<Object> {
-    return this.http.post(this.apiURL + '/createAccount', {
-      email: username,
-      password: password,
-    });
+  register(username: string, password: string, roleName: string): Observable<Object> {
+    return this.http.post(
+      this.apiURL + '/createAccount',
+      {
+        email: username,
+        password: password,
+        roleName: roleName,
+      },
+      { withCredentials: true },
+    );
   }
 
   logout(): Observable<Object> {

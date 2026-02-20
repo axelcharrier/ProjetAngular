@@ -1,24 +1,14 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
-import { UserServices } from './services/user/user-services';
-import { AuthenticationServices } from './services/authentication/authentication-services';
-import { Router } from '@angular/router';
-import { LoginPage } from './helpers/pages-helper';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonModule, ToastModule],
+  imports: [RouterOutlet, ButtonModule, ToastModule, Footer],
   templateUrl: './app.html',
 })
 export class App {
   protected readonly title = signal('ProjetAngular');
-  userServices = inject(UserServices);
-  authenticationService = inject(AuthenticationServices);
-  router = inject(Router);
-
-  toProfile() {
-    this.router.navigate(['/profile']);
-  }
 }

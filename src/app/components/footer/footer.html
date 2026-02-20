@@ -1,0 +1,21 @@
+<footer class="h-[10vh]">
+  <div class="flex flex-row justify-between items-center m-3">
+    @if (this.userServices.user().email()) {
+      @if (this.router.url === '/users-dashboard') {
+        <a pButton href="" i18n severity="secondary">Students managment</a>
+      } @else {
+        <a pButton href="/users-dashboard" i18n severity="secondary">Users managment</a>
+      }
+      <div class="flex flex-row justify-end items-center gap-2">
+        <p>{{ this.userServices.user().email() }}</p>
+        <p-button
+          icon="pi pi-user"
+          (click)="toProfile()"
+          [rounded]="true"
+          [text]="true"
+          severity="secondary"
+        />
+      </div>
+    }
+  </div>
+</footer>
