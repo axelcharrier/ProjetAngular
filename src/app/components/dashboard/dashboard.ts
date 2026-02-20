@@ -31,15 +31,15 @@ import { UpdatePage } from '../../helpers/pages-helper';
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
-  students = signal<Student[]>([]);
   StudentsService: StudentsService = inject(StudentsService);
+  userServices = inject(UserServices);
   filteredStudents = signal<Student[]>([]);
+  students = signal<Student[]>([]);
   router = inject(Router);
   messageService = inject(MessageService);
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
-  private readonly userServices = inject(UserServices);
 
   constructor() {
     this.StudentsService.getAllData()?.subscribe((response) => {

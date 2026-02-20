@@ -1,44 +1,49 @@
 <div class="h-[80vh]">
   <div class="p-2 flex justify-between">
-    <div>
-      <h2 i18n>Add a student</h2>
-      <form (submit)="handleSubmit($event)">
-        <div class="flex flex-wrap items-end gap-5 p-5">
-          <ng-container [tanstackField]="form" name="firstName" #firstName="field">
-            <p-floatLabel>
-              <input
-                pInputText
-                [name]="firstName.api.name"
-                [value]="firstName.api.state.value"
-                (blur)="firstName.api.handleBlur()"
-                (input)="firstName.api.handleChange($any($event).target.value)"
-              />
-              <label [for]="firstName.api.name" i18n>First name</label>
-            </p-floatLabel>
-          </ng-container>
+    @if (this.userServices.isTeacher()) {
+      <div>
+        <h2 i18n>Add a student</h2>
+        <form (submit)="handleSubmit($event)">
+          <div class="flex flex-wrap items-end gap-5 p-5">
+            <ng-container [tanstackField]="form" name="firstName" #firstName="field">
+              <p-floatLabel>
+                <input
+                  pInputText
+                  [name]="firstName.api.name"
+                  [value]="firstName.api.state.value"
+                  (blur)="firstName.api.handleBlur()"
+                  (input)="firstName.api.handleChange($any($event).target.value)"
+                />
+                <label [for]="firstName.api.name" i18n>First name</label>
+              </p-floatLabel>
+            </ng-container>
 
-          <ng-container [tanstackField]="form" name="lastName" #lastName="field">
-            <p-floatLabel>
-              <label [for]="lastName.api.name" i18n>Last name</label>
-              <input
-                pInputText
-                [name]="lastName.api.name"
-                [value]="lastName.api.state.value"
-                (blur)="lastName.api.handleBlur()"
-                (input)="lastName.api.handleChange($any($event).target.value)"
-              />
-            </p-floatLabel>
-          </ng-container>
-          <button pButton type="submit" class="primary" [disabled]="disableButton()">
-            @if (loaderNewStudent()) {
-              <p-progress-spinner ariaLabel="loading" [style]="{ width: '25px', height: '25px' }" />
-            } @else {
-              Create
-            }
-          </button>
-        </div>
-      </form>
-    </div>
+            <ng-container [tanstackField]="form" name="lastName" #lastName="field">
+              <p-floatLabel>
+                <label [for]="lastName.api.name" i18n>Last name</label>
+                <input
+                  pInputText
+                  [name]="lastName.api.name"
+                  [value]="lastName.api.state.value"
+                  (blur)="lastName.api.handleBlur()"
+                  (input)="lastName.api.handleChange($any($event).target.value)"
+                />
+              </p-floatLabel>
+            </ng-container>
+            <button pButton type="submit" class="primary" [disabled]="disableButton()">
+              @if (loaderNewStudent()) {
+                <p-progress-spinner
+                  ariaLabel="loading"
+                  [style]="{ width: '25px', height: '25px' }"
+                />
+              } @else {
+                Create
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    }
     <div class="flex flex-wrap items-end gap-4 p-5">
       <p-floatlabel>
         <input pInputText name="filter" #filter />
@@ -65,22 +70,26 @@
         <tr>
           <th i18n>Last name</th>
           <th i18n>First name</th>
-          <th i18n>Actions</th>
+          @if (this.userServices.isTeacher()) {
+            <th i18n>Actions</th>
+          }
         </tr>
       </ng-template>
       <ng-template #body let-user>
         <tr>
           <td>{{ user.lastName }}</td>
           <td>{{ user.firstName }}</td>
-          <td class="flex flex-wrap items-end gap-4">
-            <p-button
-              i18n-label
-              severity="danger"
-              label="Delete"
-              (click)="removeStudent(user.id)"
-            />
-            <p-button i18n-label label="Update" severity="info" (click)="toUpdatePage(user.id)" />
-          </td>
+          @if (this.userServices.isTeacher()) {
+            <td class="flex flex-wrap items-end gap-4">
+              <p-button
+                i18n-label
+                severity="danger"
+                label="Delete"
+                (click)="removeStudent(user.id)"
+              />
+              <p-button i18n-label label="Update" severity="info" (click)="toUpdatePage(user.id)" />
+            </td>
+          }
         </tr>
       </ng-template>
     </p-table>
