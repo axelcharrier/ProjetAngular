@@ -13,7 +13,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
-import { UpdatePage } from '../../helpers/pages-helper';
+import { LoginPage, UpdatePage } from '../../helpers/pages-helper';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,11 +42,16 @@ export class Dashboard {
   loaderNewStudent = signal(false);
 
   constructor() {
-    this.StudentsService.getAllData()?.subscribe((response) => {
-      this.students.set(response);
-      this.filteredStudents.set([...this.students()]);
-      this.loaderStudents.set(false);
-      this.userServices.updateUser();
+    this.StudentsService.getAllData().subscribe({
+      next: (response) => {
+        this.students.set(response);
+        this.filteredStudents.set([...this.students()]);
+        this.loaderStudents.set(false);
+        this.userServices.updateUser();
+      },
+      error: () => {
+        this.router.navigate([LoginPage.path]);
+      },
     });
   }
 
