@@ -3,10 +3,8 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
-import { HomePage, LoginPage, UsersDashboardPage } from '../helpers/pages-helper';
+import { HomePage } from '../helpers/pages-helper';
 import { UserServices } from '../services/user/user-services';
-import { subscribe } from 'diagnostics_channel';
-import { Dashboard } from '../components/dashboard/dashboard';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
