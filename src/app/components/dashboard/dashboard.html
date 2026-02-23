@@ -46,10 +46,17 @@
     }
     <div class="flex flex-wrap items-end gap-4 p-5">
       <p-floatlabel>
-        <input pInputText name="filter" #filter />
+        <input pInputText [(ngModel)]="filter" name="filter" />
         <label for="filter" i18n>Search by first name</label>
       </p-floatlabel>
-      <button pButton type="button" class="primary" (click)="filterResults(filter.value)" i18n>
+      <button
+        pButton
+        type="button"
+        class="primary"
+        [disabled]="isFilterButtonDisable()"
+        (click)="filterResults(filter())"
+        i18n
+      >
         Search
       </button>
     </div>

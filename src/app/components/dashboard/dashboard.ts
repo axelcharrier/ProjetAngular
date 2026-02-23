@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../interfaces/student';
 import { ButtonModule } from 'primeng/button';
@@ -40,6 +40,8 @@ export class Dashboard {
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
+  filter = signal<string>('');
+  activeFilter = signal<string>('');
 
   constructor() {
     this.StudentsService.getAllData().subscribe({
@@ -118,10 +120,14 @@ export class Dashboard {
       return;
     }
 
+    this.activeFilter.set(text);
+
     this.filteredStudents.set([
       ...this.students().filter((x) => x.firstName.toLowerCase().includes(text.toLowerCase())),
     ]);
   }
+
+  isFilterButtonDisable = computed(() => this.filter() == this.activeFilter());
 
   removeStudent(id: number) {
     this.StudentsService.removeStudent(id).subscribe((bool) => {
