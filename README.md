@@ -1,5 +1,10 @@
 # ProjetAngular
+_This project is one of the two parts of the project, you can find the other part [just here](https://github.com/axelcharrier/StudentApp_Backend)._
 
+## Context
+This is the frontend side of my project "StudentApp", it was a project during my internship in Exakis Nelite Nantes. This is also my very first project in Angular. I was absolutly not allowed to use any AI, all the code is based from the [Angular documentation](https://angular.dev/).
+
+# Angular part
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
 ## Development server

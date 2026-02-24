@@ -1,17 +1,17 @@
 # Télémétrie
 
-## Comment ça marche ?
+## How it work ?
 
-**Opentelemetry** est une boite à outils permettant de récupérer des différentes données de télémétrie sur les applications (traces, métriques, logs)
+**Opentelemetry** is a tools box that permitted us to claim some telemetry datas on the app (traces, metrics, logs).
 
 > [!infos] Notes
-> Ici, opentelemetry est utilisé uniquement à des fins de traçage de requête, nous n'utilisons pas les options de métriques et de logs.
+> Here, opentelemetry is used only for request tracking, we didn't metrics options.
 
-### Récupération et envoi des traces
+### Traces collection and sending 
 
-Une trace (Span) est un objets qui décrit une actions (un click, une requête api, etc.), Opentelemetry nous permet de créer et d'envoyer à notre système de récupération ces fameuses traces (ici Aspire).
+A trace (Span) is an object that describe an action (a click, a API request, etc.), OpenTelemetry enabled us to create and send traces to our collecting système (here Aspire).
 
-Pour extraire les traces, on utilise `WebtracerProvider`
+To extract traces, we used `WebtracerProvider`
 
 ```typescript
 const provider = new WebTracerProvider({
@@ -32,16 +32,16 @@ const provider = new WebTracerProvider({
 });
 ```
 
-Dans ce code on :
+In this code we :
 
-- Défini un **WebTracerProvider**
-  - **resource** : défini les variable de la trace : nom du service, id de la trace
-  - **spanProcessors** : configuration du spanExporter, ici on utilise un OTLPTraceExporter afin d'envoyer les traces à un serveur de traitement de télémétrie externe, pour du développement ou du test, on peut utiliser un `consoleTraceExporter()` afin d'afficher les traces directement dans la console du devtools.
-    - Afin de pouvoir envoyer les données au Dashboard d'aspire, il faut renseigner le "x-otlp-api-key" dans le headers de la requête, sans ça risque de CORS
+- define a **WebTracerProvider**
+  - **resource** : defines trace's variables : service's name, trace's id
+  - **spanProcessors** : configuration of spanExporter, here we use an OTLPTraceExporter to send traces to a telemetry treatment server, for development or testing, we must use ```consoleTraceExporter()``` to display traces directly in the console.
+    - To send data to the Aspire Dashboard, we need to inform the "x-otlp-api-key" field in the header and in the request, without it, we must be blocked by CORS errors.
 
-### Choix du type de traces à envoyer
+### traces type choice
 
-La dernière partie du code permet de choisir quelles traces on envoie
+The last part of this code is here to choose the trace type to send.
 
 ```typescript
 // Registering instrumentations
@@ -69,8 +69,8 @@ registerInstrumentations({
 });
 ```
 
-Dans ce code, on défini quelles traces est ce qu'on souhaite envoyer,
+In this code, we define which traces we want to send,
 
-- **UserInteractionInstrumentation :** les interactions de l'utilisateur, click, scroll etc.
-- **XMLHttpRequestInstrumentation :** Instrumentation en utilisant les "opentelemtry-semantics"
-- **FetchInstrumentation :** Renvoie une trace pour chaque réseau, on ignore les requête provenant du service de récupération de traces car beaucoup de spam inutile pour le développeur.
+- **UserInteractionInstrumentation :** User interaction, click, scroll etc.
+- **XMLHttpRequestInstrumentation :** Instrumentation by using the "opentelemetry-semantics"
+- **FetchInstrumentation :** Resend a trace for each network, we ignore request from collection service because of a lot of spam for the developper
