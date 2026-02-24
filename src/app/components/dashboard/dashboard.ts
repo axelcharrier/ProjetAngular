@@ -13,7 +13,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
-import { UpdatePage } from '../../helpers/pages-helper';
+import { LoginPage, UpdatePage } from '../../helpers/pages-helper';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,22 +32,28 @@ import { UpdatePage } from '../../helpers/pages-helper';
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
-  students = signal<Student[]>([]);
   StudentsService: StudentsService = inject(StudentsService);
+  userServices = inject(UserServices);
   filteredStudents = signal<Student[]>([]);
+  students = signal<Student[]>([]);
   router = inject(Router);
   messageService = inject(MessageService);
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
-  private readonly userServices = inject(UserServices);
 
   constructor() {
-    this.StudentsService.getAllData()?.subscribe((response) => {
-      this.students.set(response);
-      this.filteredStudents.set([...this.students()]);
-      this.loaderStudents.set(false);
-      this.userServices.updateUser();
+    this.StudentsService.getAllData().subscribe({
+      next: (response) => {
+        this.students.set(response);
+        this.filteredStudents.set([...this.students()]);
+        this.loaderStudents.set(false);
+        this.userServices.updateUser();
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 401)
+          this.router.navigate([LoginPage.path]);
+      },
     });
   }
 

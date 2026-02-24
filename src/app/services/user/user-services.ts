@@ -66,4 +66,8 @@ export class UserServices {
     });
     return isUserDeleted;
   }
+
+  isTeacher(): boolean {
+    return this.user().role() === 'Teacher';
+  }
 }
