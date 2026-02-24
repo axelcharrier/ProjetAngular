@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { Student } from '../../interfaces/student';
 import { ButtonModule } from 'primeng/button';
@@ -13,7 +13,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
-import { UpdatePage } from '../../helpers/pages-helper';
+import { LoginPage, UpdatePage } from '../../helpers/pages-helper';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,22 +31,29 @@ import { UpdatePage } from '../../helpers/pages-helper';
   templateUrl: './dashboard.html',
 })
 export class Dashboard {
-  students = signal<Student[]>([]);
   StudentsService: StudentsService = inject(StudentsService);
+  userServices = inject(UserServices);
   filteredStudents = signal<Student[]>([]);
+  students = signal<Student[]>([]);
   router = inject(Router);
   messageService = inject(MessageService);
   testValues: boolean = false;
   loaderStudents = signal(true);
   loaderNewStudent = signal(false);
-  private readonly userServices = inject(UserServices);
+  filter = signal<string>('');
+  activeFilter = signal<string>('');
 
   constructor() {
-    this.StudentsService.getAllData()?.subscribe((response) => {
-      this.students.set(response);
-      this.filteredStudents.set([...this.students()]);
-      this.loaderStudents.set(false);
-      this.userServices.updateUser();
+    this.StudentsService.getAllData().subscribe({
+      next: (response) => {
+        this.students.set(response);
+        this.filteredStudents.set([...this.students()]);
+        this.loaderStudents.set(false);
+        this.userServices.updateUser();
+      },
+      error: () => {
+        this.router.navigate([LoginPage.path]);
+      },
     });
   }
 
@@ -113,10 +120,14 @@ export class Dashboard {
       return;
     }
 
+    this.activeFilter.set(text);
+
     this.filteredStudents.set([
       ...this.students().filter((x) => x.firstName.toLowerCase().includes(text.toLowerCase())),
     ]);
   }
+
+  isFilterButtonDisable = computed(() => this.filter() == this.activeFilter());
 
   removeStudent(id: number) {
     this.StudentsService.removeStudent(id).subscribe((bool) => {

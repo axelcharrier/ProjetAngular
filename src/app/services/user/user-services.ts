@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { AuthenticationServices } from '../authentication/authentication-services';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -66,4 +66,6 @@ export class UserServices {
     });
     return isUserDeleted;
   }
+
+  isTeacher = computed<boolean>(() => this.user().role() === 'Teacher');
 }

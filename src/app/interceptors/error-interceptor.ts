@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
-import { LoginPage } from '../helpers/pages-helper';
+import { HomePage } from '../helpers/pages-helper';
 import { UserServices } from '../services/user/user-services';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
@@ -17,23 +17,21 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       switch (errorResponse.status) {
         case 0:
           detailMessage = errorResponse.status + ' : Cannot access server';
-          if (userService.user().email() == null) {
-            router.navigate([LoginPage.path]);
-            break;
-          }
+          router.navigate([HomePage.path]);
           break;
         case 400:
           detailMessage = errorResponse.status + ' : Bad request';
           break;
         case 401:
           detailMessage = errorResponse.status + ' : Unauthorized';
-          if (userService.user().email() == null) {
-            router.navigate([LoginPage.path]);
-            break;
-          }
+          router.navigate([HomePage.path]);
           break;
         case 402:
           detailMessage = errorResponse.status + ' : Access denied';
+          break;
+        case 403:
+          detailMessage = errorResponse.status + ' : Forbidden';
+          router.navigate([HomePage.path]);
           break;
         case 404:
           detailMessage = errorResponse.status + ' : Not Found';
