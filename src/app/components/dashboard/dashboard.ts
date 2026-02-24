@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserServices } from '../../services/user/user-services';
 import { LoginPage, UpdatePage } from '../../helpers/pages-helper';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,8 +50,9 @@ export class Dashboard {
         this.loaderStudents.set(false);
         this.userServices.updateUser();
       },
-      error: () => {
-        this.router.navigate([LoginPage.path]);
+      error: (error: HttpErrorResponse) => {
+        if (error.status === 401)
+          this.router.navigate([LoginPage.path]);
       },
     });
   }
